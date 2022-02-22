@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 @available(iOS 13.0, *)
-extension AnyTransition{
+public extension AnyTransition{
     static var moveDown: AnyTransition{
         .move(edge: .top).combined(with: .opacity)
     }

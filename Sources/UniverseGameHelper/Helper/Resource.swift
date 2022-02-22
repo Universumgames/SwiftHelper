@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Resource {
+public class Resource {
     func loadResource(filename: String, fileEnding: String) -> String? {
         if let fileURL = Bundle.main.url(forResource: filename, withExtension: fileEnding) {
             if let fileContents = try? String(contentsOf: fileURL) {

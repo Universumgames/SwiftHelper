@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 @available(iOS 13.0, *)
-class Graph {
+public class Graph {
     /**
      points: Array of normalized grpah points, values are sorted internally (first value x coordinate (0 left, 1 right), second value y coordinate (0 bottom, 1 top)
      */

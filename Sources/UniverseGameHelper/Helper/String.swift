@@ -8,7 +8,7 @@
 import Foundation
 
 
-extension String {
+public extension String {
     var wordCount: Int {
         return split { $0 == " " || $0.isNewline }.count
     }

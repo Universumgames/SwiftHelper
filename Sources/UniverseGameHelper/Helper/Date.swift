@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension Date {
+public extension Date {
     func equalsCalendarDate(compare: Date) -> Bool {
         return Calendar.current.dateComponents([.day, .year, .month], from: self) == Calendar.current.dateComponents([.day, .year, .month], from: compare)
     }
@@ -102,7 +102,7 @@ extension Date {
         calendar.component(.day, from: self)
     }
 
-    public func startOfDay() -> Date {
+    func startOfDay() -> Date {
         return calendar.startOfDay(for: self)
     }
 

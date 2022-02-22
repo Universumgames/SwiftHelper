@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension Array {
+public extension Array {
     func shifted(by shiftAmount: Int) -> Array<Element> {
         // 1
         guard count > 0, (shiftAmount % count) != 0 else { return self }

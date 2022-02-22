@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-class Mail {
+public class Mail {
     
     @available(iOSApplicationExtension, unavailable)
     static func createEmailUrl(subject: String, body: String, to reciever: String) -> URL? {
