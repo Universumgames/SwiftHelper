@@ -1,3 +1,4 @@
 # UniverseGameHelper
 
-A description of this package.
+A small SwiftUI Helper Framework
+
