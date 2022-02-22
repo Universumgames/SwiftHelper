@@ -8,7 +8,7 @@
 import Foundation
 
 class Bugreport{
-    static func reportBug(for app: String, version: String, title: String, description: String, from userMail: String? = nil, to bugreportURL: String = Definitions.bugreportLink) -> Bool{
+    static func reportBug(for app: String, version: String, title: String, description: String, from userMail: String? = nil, to bugreportURL: String) -> Bool{
         
         let link = URL(string: bugreportURL)!
         var request = URLRequest(url: link)

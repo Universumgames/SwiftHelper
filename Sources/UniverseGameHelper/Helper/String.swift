@@ -7,6 +7,7 @@
 
 import Foundation
 
+
 extension String {
     var wordCount: Int {
         return split { $0 == " " || $0.isNewline }.count
@@ -28,6 +29,7 @@ extension String {
         return count
     }
 
+    @available(iOS 15, *)
     func markdownToAttributed() -> AttributedString {
         do {
             return try AttributedString(markdown: self) /// convert to AttributedString
