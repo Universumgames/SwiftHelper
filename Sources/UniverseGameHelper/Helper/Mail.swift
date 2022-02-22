@@ -11,7 +11,7 @@ import SwiftUI
 public class Mail {
     
     @available(iOSApplicationExtension, unavailable)
-    static func createEmailUrl(subject: String, body: String, to reciever: String) -> URL? {
+    public static func createEmailUrl(subject: String, body: String, to reciever: String) -> URL? {
         let to = reciever
         let subjectEncoded = subject.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
         let bodyEncoded = body.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!

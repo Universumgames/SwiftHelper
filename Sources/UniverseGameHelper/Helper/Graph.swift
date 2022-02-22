@@ -13,7 +13,7 @@ public class Graph {
     /**
      points: Array of normalized grpah points, values are sorted internally (first value x coordinate (0 left, 1 right), second value y coordinate (0 bottom, 1 top)
      */
-    static func integralPath(points: [Double: Double], width: CGFloat, height: CGFloat, complicated: Bool = false) -> Path {
+    public static func integralPath(points: [Double: Double], width: CGFloat, height: CGFloat, complicated: Bool = false) -> Path {
         let bezierOffest = CGFloat(Double(width) / Double(points.count))
 
         let sorted = points.sorted(by: { $0.key < $1.key })
@@ -37,7 +37,7 @@ public class Graph {
         }
     }
 
-    static func linePath(points: [Double: Double], width: CGFloat, height: CGFloat, complicated: Bool = false) -> Path {
+    public static func linePath(points: [Double: Double], width: CGFloat, height: CGFloat, complicated: Bool = false) -> Path {
         let bezierOffest = CGFloat(Double(width) / Double(points.count))
 
         let sorted = points.sorted(by: { $0.key < $1.key })
@@ -58,7 +58,7 @@ public class Graph {
         }
     }
 
-    static func trendPath(line: Line, width: CGFloat, height: CGFloat) -> Path {
+    public static func trendPath(line: Line, width: CGFloat, height: CGFloat) -> Path {
         return Path { path in
             path.move(to: normailzedCoordinateToPathPoint(0, line.b, width, height))
             path.addLine(to: normailzedCoordinateToPathPoint(1, line.m + line.b, width, height))
@@ -72,13 +72,13 @@ public class Graph {
     /**
      Used formula: y= mx + b
      */
-    struct Line {
+    public struct Line {
         var m: Double
         var b: Double
     }
 
     // equation source: https://classroom.synonym.com/calculate-trendline-2709.html
-    static func trendLine(points: [Double: Double]) -> Line {
+    public static func trendLine(points: [Double: Double]) -> Line {
         let sorted = points.sorted(by: { $0.key < $1.key })
         var a = 0.0
         var keySum = 0.0
