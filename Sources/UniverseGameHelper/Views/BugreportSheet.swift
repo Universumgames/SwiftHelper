@@ -39,11 +39,12 @@ public struct BugreportSheet: View {
                 dismiss()
             } label: {
                 Text(String(localized: "button.cancel", bundle: .module))
+                    .font(.subheadline)
                     .allowsTightening(true)
             }
             Spacer()
             Text(String(localized: "bugreport.sheetTitle", bundle: .module))
-                .font(.title)
+                .font(.title2)
                 .allowsTightening(true)
                 .padding()
             Spacer()
@@ -55,6 +56,7 @@ public struct BugreportSheet: View {
                 }
             } label: {
                 Text(String(localized: "button.sendbugreport", bundle: .module))
+                    .font(.subheadline)
                     .allowsTightening(true)
             }
         }

@@ -12,7 +12,7 @@
 
 "button.cancel" = "Abbrechen";
 
-"bugreport.note" = "Das Absenden eines Bugreports sendet nur die hier angegebenen Daten (sowwie den Programmnamen und Version) an einen externen Server für eine weitere verarbeitung und letztendliche Behebung des Problems durch einen Programmierer. Die bereitgestellten Daten werden durch die Programmierer selbst gelöscht sobald das Problem behoben wurde. Zugriff auf diese Daten haben nur die Serverinhaber und eine von ihnen ausgeählte kleine Gruppe an Personen.";
+"bugreport.note" = "Das Absenden eines Bugreports sendet nur die hier angegebenen Daten (sowie den Programmnamen und Version) an einen externen Server für eine weitere verarbeitung und letztendliche Behebung des Problems durch einen Programmierer. Die bereitgestellten Daten werden durch die Programmierer selbst gelöscht sobald das Problem behoben wurde. Zugriff auf diese Daten haben nur die Serverinhaber und eine von ihnen ausgeählte kleine Gruppe an Personen.";
 
 "button.skip" = "Skip";
 
