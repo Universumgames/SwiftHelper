@@ -26,7 +26,7 @@ public struct BugreportSheet: View {
         self.appVersionString = appVersionString
         self.bugreportLink = bugreportLink
         self.secondaryBackground = secondaryBackground
-        self._showThank = showThank
+        _showThank = showThank
     }
 
     func checkAllRequired() -> Bool {
@@ -39,10 +39,12 @@ public struct BugreportSheet: View {
                 dismiss()
             } label: {
                 Text(String(localized: "button.cancel", bundle: .module))
+                    .allowsTightening(true)
             }
             Spacer()
             Text(String(localized: "bugreport.sheetTitle", bundle: .module))
                 .font(.title)
+                .allowsTightening(true)
                 .padding()
             Spacer()
             Button {
@@ -53,6 +55,7 @@ public struct BugreportSheet: View {
                 }
             } label: {
                 Text(String(localized: "button.sendbugreport", bundle: .module))
+                    .allowsTightening(true)
             }
         }
     }
@@ -68,6 +71,7 @@ public struct BugreportSheet: View {
                     .padding()
                 Text(String(localized: "bugreport.title", bundle: .module))
                 TextField(String(localized: "bugreport.title", bundle: .module), text: $title)
+                    .allowsTightening(true)
                     .padding()
                     .background(secondaryBackground)
                     .cornerRadius(10)
@@ -80,6 +84,7 @@ public struct BugreportSheet: View {
                     .background(secondaryBackground)
                     .cornerRadius(10)
                 Text(String(localized: "bugreport.description", bundle: .module))
+                    .allowsTightening(true)
                 TextEditor(text: $description)
                 #if os(iOS)
                     .textInputAutocapitalization(.sentences)
