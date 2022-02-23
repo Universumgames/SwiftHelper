@@ -8,16 +8,16 @@
 import MarkdownUI
 import SwiftUI
 
-struct StartupSheet: View {
+public struct StartupSheet: View {
     @Environment(\.dismiss) var dismiss
 
-    var isFirstInstall: Bool
-    var freshInstallContent: String
-    var whatsNewContent: String
+    public var isFirstInstall: Bool
+    public var freshInstallContent: String
+    public var whatsNewContent: String
 
-    var assetPathPrefix: String = "assset"
+    public var assetPathPrefix: String = "assset"
 
-    var overrideFreshInstall = false
+    public var overrideFreshInstall = false
 
     var head: some View {
         HStack {
@@ -32,7 +32,7 @@ struct StartupSheet: View {
         .padding()
     }
 
-    var body: some View {
+    public var body: some View {
         VStack {
             head
             TabView {

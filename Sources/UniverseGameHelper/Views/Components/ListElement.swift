@@ -7,18 +7,18 @@
 
 import SwiftUI
 
-struct ListElement<Content: View>: View {
+public struct ListElement<Content: View>: View {
     var cornerRadius: CGFloat
     var bgColor: Color
     var content: () -> Content
 
-    init(cornerRadius: CGFloat, bgColor: Color, @ViewBuilder content: @escaping () -> Content) {
+    public init(cornerRadius: CGFloat, bgColor: Color, @ViewBuilder content: @escaping () -> Content) {
         self.cornerRadius = cornerRadius
         self.bgColor = bgColor
         self.content = content
     }
 
-    var body: some View {
+    public var body: some View {
         HStack {
             Group(content: content)
         }

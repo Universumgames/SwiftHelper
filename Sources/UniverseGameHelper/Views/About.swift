@@ -7,18 +7,18 @@
 
 import SwiftUI
 
-struct About<base: BaseDefinition, colors: ColorDefinition, install: InstallationDefinitions, styling: StylingDefinition>: View {
+public struct About<base: BaseDefinition, colors: ColorDefinition, install: InstallationDefinitions, styling: StylingDefinition>: View {
     @State private var showInfo = false
     @State private var showAlert = false
     @State private var showBugreport = false
     @State private var showBugReportToast = false
     @State private var showOpeningSheet = false
 
-    var infoText: String?
+    public var infoText: String?
 
-    var additionalListElements: [ListElement<AnyView>] = []
+    public var additionalListElements: [ListElement<AnyView>] = []
 
-    var belowFootNote: ListElement<AnyView>? = nil
+    public var belowFootNote: ListElement<AnyView>? = nil
 
     var infoContainer: some View {
         Group {
@@ -63,7 +63,7 @@ struct About<base: BaseDefinition, colors: ColorDefinition, install: Installatio
         }
     }
 
-    var body: some View {
+    public var body: some View {
         ScrollView {
             VStack(alignment: .leading) {
                 HStack {
