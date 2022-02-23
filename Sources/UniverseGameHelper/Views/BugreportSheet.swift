@@ -7,19 +7,27 @@
 
 import SwiftUI
 
-struct BugreportSheet: View {
+public struct BugreportSheet: View {
     @Environment(\.dismiss) var dismiss
 
-    var appname: String
-    var appVersionString: String
-    var bugreportLink: String
-    var secondaryBackground: Color
+    public var appname: String
+    public var appVersionString: String
+    public var bugreportLink: String
+    public var secondaryBackground: Color
 
     @State private var title: String = ""
     @State private var description: String = ""
     @State private var mail: String = ""
 
     @Binding var showThank: Bool
+
+    public init(appname: String, appVersionString: String, bugreportLink: String, secondaryBackground: Color, showThank: Binding<Bool> = .constant(false)) {
+        self.appname = appname
+        self.appVersionString = appVersionString
+        self.bugreportLink = bugreportLink
+        self.secondaryBackground = secondaryBackground
+        self._showThank = showThank
+    }
 
     func checkAllRequired() -> Bool {
         return !title.isEmpty && !description.isEmpty
@@ -49,7 +57,7 @@ struct BugreportSheet: View {
         }
     }
 
-    var body: some View {
+    public var body: some View {
         VStack {
             header
                 .padding()

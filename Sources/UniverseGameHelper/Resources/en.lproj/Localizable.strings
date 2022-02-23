@@ -15,3 +15,5 @@
 "bugreport.note" = "Submitting an bugreport will send only the provided data to an external server for further processing and storage (as long as the bug persist to extist or the developer deletes it on itself. Only the server administrators and a few people selected by them have access to this data.";
 
 "button.skip" = "Überspringen";
+
+"about.button.information" = "Information";
