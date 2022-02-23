@@ -13,8 +13,10 @@ public protocol StylingDefinition {
 }
 
 public protocol InstallationDefinitions {
-    associatedtype Content: View
-
+    
+    associatedtype testFlightNoteType: View
+    associatedtype appVersionNoteType: View
+    
     static var isTestflightInstallation: Bool { get }
 
     static var isFirstInstall: Bool { get }
@@ -24,7 +26,8 @@ public protocol InstallationDefinitions {
 
     static var showStartupSheet: Bool { get }
 
-    static var testFlightNote: Content { get }
+    @ViewBuilder
+    static var testFlightNote: testFlightNoteType   { get }
 
     static var releaseVersionNumber: String? { get }
 
@@ -32,15 +35,17 @@ public protocol InstallationDefinitions {
 
     static var appVersionString: String { get }
 
-    static var appVersionNote: Content { get }
+    static var appVersionNote: appVersionNoteType { get }
 }
 
-public protocol MainColors {
+public protocol ColorDefinition {
     static var background: Color { get }
     static var secondaryBackground: Color { get }
 }
 
 public protocol BaseDefinition {
+    associatedtype createdByType: View
+    
     static var bmcLink: String { get }
     static var githubLink: String { get }
 
@@ -48,7 +53,8 @@ public protocol BaseDefinition {
 
     static var showGitRepo: Bool { get }
     static var gitRepoLink: String { get }
+    
+    static var appName: String {get}
 
-    associatedtype Content: View
-    static var createdByElement: Content { get }
+    static var createdByElement: createdByType { get }
 }

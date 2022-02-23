@@ -9,12 +9,10 @@ import SwiftUI
 
 struct BugreportSheet: View {
     @Environment(\.dismiss) var dismiss
-    
+
     var appname: String
     var appVersionString: String
     var bugreportLink: String
-    
-    
     var secondaryBackground: Color
 
     @State private var title: String = ""
@@ -29,7 +27,7 @@ struct BugreportSheet: View {
 
     var header: some View {
         HStack {
-            Button{
+            Button {
                 dismiss()
             } label: {
                 Text(String(localized: "button.cancel", bundle: .module))
@@ -70,7 +68,7 @@ struct BugreportSheet: View {
                 #if os(iOS)
                     .keyboardType(.emailAddress)
                 #endif
-                    .padding()
+                .padding()
                     .background(secondaryBackground)
                     .cornerRadius(10)
                 Text(String(localized: "bugreport.description", bundle: .module))
@@ -92,6 +90,6 @@ struct BugreportSheet: View {
 
 struct Bugreport_Previews: PreviewProvider {
     static var previews: some View {
-        BugreportSheet(appname: "Testapp", appVersionString: "perview-version", bugreportLink: "https://google.com", secondaryBackground: Color.blue, showThank: .constant(false))
+        BugreportSheet(appname: "test app", appVersionString: "test version", bugreportLink: "https://google.com", secondaryBackground: Color.gray, showThank: .constant(false))
     }
 }
