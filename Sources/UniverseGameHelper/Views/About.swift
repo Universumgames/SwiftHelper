@@ -72,10 +72,6 @@ public struct About<base: BaseDefinition, colors: ColorDefinition, install: Inst
     public var body: some View {
         ScrollView {
             VStack(alignment: .leading) {
-                HStack {
-                    Spacer()
-                }
-
                 infoContainer
 
                 Link(destination: URL(string: base.githubLink)!) {
