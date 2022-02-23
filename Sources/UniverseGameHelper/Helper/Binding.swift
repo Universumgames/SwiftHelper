@@ -8,7 +8,6 @@
 import Foundation
 import SwiftUI
 
-@available(iOS 13.0, *)
 public extension Binding where Value: Equatable {
     init(_ source: Binding<Value?>, replacingNilWith nilProxy: Value) {
         self.init(
