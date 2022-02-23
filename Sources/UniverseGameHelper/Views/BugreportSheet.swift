@@ -99,6 +99,7 @@ public struct BugreportSheet: View {
                         .padding()
                         .background(secondaryBackground)
                         .cornerRadius(10)
+                        .frame(height: 500)
                 }
             }
         }
