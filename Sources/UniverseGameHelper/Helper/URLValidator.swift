@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-func verifyUrl(urlString: String?) -> Bool {
+public func verifyUrl(urlString: String?) -> Bool {
     if let urlString = urlString {
         if let url = NSURL(string: urlString) {
             return UIApplication.shared.canOpenURL(url as URL)
@@ -17,7 +17,7 @@ func verifyUrl(urlString: String?) -> Bool {
     return false
 }
 
-func fixBrowserURL(url: String) -> String {
+public func fixBrowserURL(url: String) -> String {
     return url
 }
 
