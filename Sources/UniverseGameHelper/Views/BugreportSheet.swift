@@ -70,6 +70,7 @@ public struct BugreportSheet: View {
             VStack(alignment: .leading) {
                 Text(String(localized: "bugreport.note", bundle: .module))
                     .font(.footnote)
+                    .lineLimit(Int.max)
                     .padding()
                 Text(String(localized: "bugreport.title", bundle: .module))
                 TextField(String(localized: "bugreport.title", bundle: .module), text: $title)
