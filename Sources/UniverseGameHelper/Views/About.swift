@@ -32,7 +32,7 @@ public struct About<base: BaseDefinition, colors: ColorDefinition, install: Inst
                 ListElement(cornerRadius: styling.defaultCornerRadius, bgColor: colors.secondaryBackground) {
                     VStack {
                         HStack {
-                            Text("about.button.information")
+                            Text(String(localized: "about.button.information", bundle: .module))
                             Spacer()
                             Image(systemName: "chevron.right")
                                 .rotationEffect(.degrees(showInfo ? 90 : 0))
@@ -80,7 +80,7 @@ public struct About<base: BaseDefinition, colors: ColorDefinition, install: Inst
 
                 Link(destination: URL(string: base.githubLink)!) {
                     ListElement(cornerRadius: styling.defaultCornerRadius, bgColor: colors.secondaryBackground) {
-                        Text("about.github")
+                        Text(String(localized: "about.github", bundle: .module))
                         Spacer()
                     }
                 }
@@ -90,7 +90,7 @@ public struct About<base: BaseDefinition, colors: ColorDefinition, install: Inst
                     showBugreport.toggle()
                 } label: {
                     ListElement(cornerRadius: styling.defaultCornerRadius, bgColor: colors.secondaryBackground) {
-                        Text("about.bugreport")
+                        Text(String(localized: "about.bugreport", bundle: .module))
                         Spacer()
                     }
                 }
@@ -101,7 +101,7 @@ public struct About<base: BaseDefinition, colors: ColorDefinition, install: Inst
 
                 Link(destination: URL(string: base.bmcLink)!) {
                     ListElement(cornerRadius: styling.defaultCornerRadius, bgColor: colors.secondaryBackground) {
-                        Text("button.support")
+                        Text(String(localized: "about.support", bundle: .module))
                         Spacer()
                         Image("bmc_cup")
                             .resizable()
@@ -113,7 +113,7 @@ public struct About<base: BaseDefinition, colors: ColorDefinition, install: Inst
 
                 if base.showGitRepo {
                     ListElement(cornerRadius: styling.defaultCornerRadius, bgColor: colors.secondaryBackground) {
-                        Link("about.gitrepo", destination: URL(string: base.gitRepoLink)!)
+                        Link(String(localized: "about.gitrepo", bundle: .module), destination: URL(string: base.gitRepoLink)!)
                         Spacer()
                     }
                 }

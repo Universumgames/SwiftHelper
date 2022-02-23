@@ -17,3 +17,11 @@
 "button.skip" = "Skip";
 
 "about.button.information" = "Information";
+
+"about.github" = "Github";
+
+"about.bugreport" = "Bug melden";
+
+"about.support" = "Unterstüze mich";
+
+"about.gitrepo" = "Git Repo";
