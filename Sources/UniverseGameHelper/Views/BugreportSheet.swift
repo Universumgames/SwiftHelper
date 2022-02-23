@@ -67,37 +67,39 @@ public struct BugreportSheet: View {
             header
                 .padding()
 
-            VStack(alignment: .leading) {
-                Text(String(localized: "bugreport.note", bundle: .module))
-                    .font(.footnote)
-                    .lineLimit(Int.max)
+            ScrollView {
+                VStack(alignment: .leading) {
+                    Text(String(localized: "bugreport.note", bundle: .module))
+                        .font(.footnote)
+                        .lineLimit(Int.max)
+                        .padding()
+                    Text(String(localized: "bugreport.title", bundle: .module))
+                    TextField(String(localized: "bugreport.title", bundle: .module), text: $title)
+                        .allowsTightening(true)
+                        .padding()
+                        .background(secondaryBackground)
+                        .cornerRadius(10)
+                    Text(String(localized: "bugreport.mail", bundle: .module))
+                    TextField(String(localized: "bugreport.mail", bundle: .module), text: $mail)
+                    #if os(iOS)
+                        .keyboardType(.emailAddress)
+                    #endif
                     .padding()
-                Text(String(localized: "bugreport.title", bundle: .module))
-                TextField(String(localized: "bugreport.title", bundle: .module), text: $title)
+                        .background(secondaryBackground)
+                        .cornerRadius(10)
+                    Text(String(localized: "bugreport.description", bundle: .module))
+                        .allowsTightening(true)
+                    TextEditor(text: $description)
+                    #if os(iOS)
+                        .textInputAutocapitalization(.sentences)
+                        .keyboardType(.default)
+                        .multilineTextAlignment(.leading)
+                    #endif
                     .allowsTightening(true)
-                    .padding()
-                    .background(secondaryBackground)
-                    .cornerRadius(10)
-                Text(String(localized: "bugreport.mail", bundle: .module))
-                TextField(String(localized: "bugreport.mail", bundle: .module), text: $mail)
-                #if os(iOS)
-                    .keyboardType(.emailAddress)
-                #endif
-                .padding()
-                    .background(secondaryBackground)
-                    .cornerRadius(10)
-                Text(String(localized: "bugreport.description", bundle: .module))
-                    .allowsTightening(true)
-                TextEditor(text: $description)
-                #if os(iOS)
-                    .textInputAutocapitalization(.sentences)
-                    .keyboardType(.default)
-                    .multilineTextAlignment(.leading)
-                #endif
-                .allowsTightening(true)
-                    .padding()
-                    .background(secondaryBackground)
-                    .cornerRadius(10)
+                        .padding()
+                        .background(secondaryBackground)
+                        .cornerRadius(10)
+                }
             }
         }
         .padding()
