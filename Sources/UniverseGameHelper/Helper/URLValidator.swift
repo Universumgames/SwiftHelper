@@ -18,7 +18,9 @@ public func verifyUrl(urlString: String?) -> Bool {
 }
 
 public func fixBrowserURL(url: String) -> String {
+    let lowerCase = url.lowercased()
+    if lowerCase.starts(with: "http://") || lowerCase.starts(with: "https://") {
+        return "https://" + url
+    }
     return url
 }
-
-
