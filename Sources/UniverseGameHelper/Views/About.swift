@@ -98,41 +98,38 @@ public struct About<base: BaseDefinition, colors: ColorDefinition, install: Inst
                     BugreportSheet(appname: base.appName, appVersionString: install.appVersionString, bugreportLink: base.bugreportLink, secondaryBackground: colors.secondaryBackground, showThank: $showBugReportToast)
                 }
 
-                Link(destination: URL(string: base.bmcLink)!) {
-                    ListElement(cornerRadius: styling.defaultCornerRadius, bgColor: colors.secondaryBackground) {
-                        VStack {
-                            HStack {
-                                Text(String(localized: "about.support", bundle: .module))
-                                Spacer()
-                                Image("bmc_cup")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 50, height: 50)
-                            }
-                            ForEach(base.supportShop()) { product in
-                                HStack {
-                                    Text(product.displayName)
-                                    Spacer()
-                                    Text(product.description)
-                                    Spacer()
-                                    Button {
-                                        supportCallback(product.id)
-                                    } label: {
-                                        Text(product.displayPrice)
-                                    }
-                                }
+                ListElement(cornerRadius: styling.defaultCornerRadius, bgColor: colors.background) {
+                    ForEach(base.supportShop()) { product in
+                        HStack {
+                            Text(product.displayName)
+                            Spacer()
+                            Text(product.description)
+                            Spacer()
+                            Button {
+                                supportCallback(product.id)
+                            } label: {
+                                Text(product.displayPrice)
                             }
                         }
+                    }
+                }
+
+                Link(destination: URL(string: base.bmcLink)!) {
+                    ListElement(cornerRadius: styling.defaultCornerRadius, bgColor: colors.secondaryBackground) {
+                        Text(String(localized: "about.support", bundle: .module))
+                        Spacer()
+                        Image("bmc_cup")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 50, height: 50)
                     }
                 }
                 .buttonStyle(.borderless)
 
                 if base.showGitRepo {
                     ListElement(cornerRadius: styling.defaultCornerRadius, bgColor: colors.secondaryBackground) {
-                        HStack {
-                            Text(String(localized: "about.gitrepo", bundle: .module))
-                            Spacer()
-                        }
+                        Text(String(localized: "about.gitrepo", bundle: .module))
+                        Spacer()
                     }
                 }
 
