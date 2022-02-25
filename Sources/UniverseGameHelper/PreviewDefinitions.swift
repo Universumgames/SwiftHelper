@@ -7,9 +7,11 @@
 
 import Foundation
 import SwiftUI
+import StoreKit
 
 class PreviewDefinitions {
     class Base: BaseDefinition {
+        
         static var bmcLink: String { "" }
 
         static var githubLink: String { "" }
@@ -21,6 +23,10 @@ class PreviewDefinitions {
         static var gitRepoLink: String { "" }
 
         static var appName: String { "" }
+        
+        static func supportShop() -> [Product] {
+            []
+        }
     }
 
     class Colors: ColorDefinition {

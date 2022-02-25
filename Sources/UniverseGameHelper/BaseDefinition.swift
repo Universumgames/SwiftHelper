@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import StoreKit
 import SwiftUI
 
 public protocol StylingDefinition {
@@ -13,10 +14,9 @@ public protocol StylingDefinition {
 }
 
 public protocol InstallationDefinitions {
-    
     associatedtype testFlightNoteType: View
     associatedtype appVersionNoteType: View
-    
+
     static var isTestflightInstallation: Bool { get }
 
     static var isFirstInstall: Bool { get }
@@ -27,7 +27,7 @@ public protocol InstallationDefinitions {
     static var showStartupSheet: Bool { get }
 
     @ViewBuilder
-    static var testFlightNote: testFlightNoteType   { get }
+    static var testFlightNote: testFlightNoteType { get }
 
     static var releaseVersionNumber: String? { get }
 
@@ -45,16 +45,18 @@ public protocol ColorDefinition {
 
 public protocol BaseDefinition {
     associatedtype createdByType: View
-    
+
     static var bmcLink: String { get }
     static var githubLink: String { get }
+
+    static func supportShop() -> [Product]
 
     static var bugreportLink: String { get }
 
     static var showGitRepo: Bool { get }
     static var gitRepoLink: String { get }
-    
-    static var appName: String {get}
+
+    static var appName: String { get }
 
     static var createdByElement: createdByType { get }
 }

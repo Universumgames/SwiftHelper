@@ -14,16 +14,19 @@ public struct About<base: BaseDefinition, colors: ColorDefinition, install: Inst
     @State private var showBugReportToast = false
     @State private var showOpeningSheet = false
 
+    public var supportCallback: (String) -> Void
+
     public var infoText: String?
 
     public var additionalListElements: [ListElement<AnyView>] = []
 
-    public var belowFootNote: ListElement<AnyView>? = nil
-    
-    public init(infoText: String? = nil, additionalListElements: [ListElement<AnyView>] = [], belowFootNote: ListElement<AnyView>? = nil){
+    public var belowFootNote: ListElement<AnyView>?
+
+    public init(supportCallback: @escaping (String) -> Void, infoText: String? = nil, additionalListElements: [ListElement<AnyView>] = [], belowFootNote: ListElement<AnyView>? = nil) {
         self.infoText = infoText
         self.additionalListElements = additionalListElements
         self.belowFootNote = belowFootNote
+        self.supportCallback = supportCallback
     }
 
     var infoContainer: some View {
@@ -109,18 +112,27 @@ public struct About<base: BaseDefinition, colors: ColorDefinition, install: Inst
 
                 if base.showGitRepo {
                     ListElement(cornerRadius: styling.defaultCornerRadius, bgColor: colors.secondaryBackground) {
-                        Link(String(localized: "about.gitrepo", bundle: .module), destination: URL(string: base.gitRepoLink)!)
-                        Spacer()
+                        VStack {
+                            HStack {
+                                Text(String(localized: "about.gitrepo", bundle: .module))
+                                Spacer()
+                            }
+                            ForEach(base.supportShop()) { product in
+                                HStack {
+                                    Text(product.displayName)
+                                    Spacer()
+                                    Text(product.description)
+                                    Spacer()
+                                    Button {
+                                        supportCallback(product.id)
+                                    } label: {
+                                        Text(product.displayPrice)
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
-
-                Link(destination: URL(string: base.bmcLink)!) {
-                    Image("bmc")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .cornerRadius(styling.defaultCornerRadius)
-                }
-                .buttonStyle(.borderless)
 
                 ForEach(0 ..< additionalListElements.count) { index in
                     additionalListElements[index]
@@ -139,7 +151,7 @@ public struct About<base: BaseDefinition, colors: ColorDefinition, install: Inst
 
 struct About_Previews: PreviewProvider {
     static var previews: some View {
-        About<PreviewDefinitions.Base, PreviewDefinitions.Colors, PreviewDefinitions.Installation, PreviewDefinitions.Styling>(belowFootNote:
+        About<PreviewDefinitions.Base, PreviewDefinitions.Colors, PreviewDefinitions.Installation, PreviewDefinitions.Styling>(supportCallback: { _ in }, belowFootNote:
             ListElement(cornerRadius: 20, bgColor: Color.gray) {
                 AnyView(
                     HStack {
