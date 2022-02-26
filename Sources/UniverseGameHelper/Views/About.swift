@@ -21,7 +21,7 @@ public struct About<base: BaseDefinition, colors: ColorDefinition, install: Inst
 
     public var belowFootNote: ListElement<AnyView>?
 
-    public init(supportCallback: @escaping (String) -> Void, infoText: String? = nil, additionalListElements: [ListElement<AnyView>] = [], belowFootNote: ListElement<AnyView>? = nil) {
+    public init(infoText: String? = nil, additionalListElements: [ListElement<AnyView>] = [], belowFootNote: ListElement<AnyView>? = nil) {
         self.infoText = infoText
         self.additionalListElements = additionalListElements
         self.belowFootNote = belowFootNote
