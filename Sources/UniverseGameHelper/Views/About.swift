@@ -5,10 +5,10 @@
 //  Created by Tom Arlt on 25.01.22.
 //
 
-import SwiftUI
 import StoreKit
+import SwiftUI
 
-public struct About<base: BaseDefinition, colors: ColorDefinition, install: InstallationDefinitions, styling: StylingDefinition>: View {
+public struct About<base: BaseDefinition, colors: ColorDefinition, install: InstallationDefinitions, styling: StylingDefinition, additionalElementContainerType: View, belowFootNoteType: View>: View {
     @State private var showInfo = false
     @State private var showAlert = false
     @State private var showBugreport = false
@@ -17,13 +17,13 @@ public struct About<base: BaseDefinition, colors: ColorDefinition, install: Inst
 
     public var infoText: String?
 
-    public var additionalListElements: [ListElement<AnyView>] = []
+    public var additionalListElementContainer: additionalElementContainerType?
 
-    public var belowFootNote: ListElement<AnyView>?
+    public var belowFootNote: belowFootNoteType?
 
-    public init(infoText: String? = nil, additionalListElements: [View<ListElement<AnyView>>] = [], belowFootNote: View<ListElement<AnyView>>? = nil) {
+    public init(infoText: String? = nil, additionalListElementContainer: additionalElementContainerType? = nil, belowFootNote: belowFootNoteType? = nil) {
         self.infoText = infoText
-        self.additionalListElements = additionalListElements
+        self.additionalListElementContainer = additionalListElementContainer
         self.belowFootNote = belowFootNote
     }
 
@@ -115,8 +115,8 @@ public struct About<base: BaseDefinition, colors: ColorDefinition, install: Inst
                     }
                 }
 
-                ForEach(0 ..< additionalListElements.count) { index in
-                    additionalListElements[index]
+                if let additionalListElementContainer = additionalListElementContainer {
+                    additionalListElementContainer
                 }
 
                 footnote
@@ -132,7 +132,7 @@ public struct About<base: BaseDefinition, colors: ColorDefinition, install: Inst
 
 struct About_Previews: PreviewProvider {
     static var previews: some View {
-        About<PreviewDefinitions.Base, PreviewDefinitions.Colors, PreviewDefinitions.Installation, PreviewDefinitions.Styling>(belowFootNote:
+        About<PreviewDefinitions.Base, PreviewDefinitions.Colors, PreviewDefinitions.Installation, PreviewDefinitions.Styling, AnyView, ListElement<AnyView>>(belowFootNote:
             ListElement(cornerRadius: 20, bgColor: Color.gray) {
                 AnyView(
                     HStack {
