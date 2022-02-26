@@ -49,8 +49,6 @@ public protocol BaseDefinition {
     static var bmcLink: String { get }
     static var githubLink: String { get }
 
-    static func supportShop() -> [Product]
-
     static var bugreportLink: String { get }
 
     static var showGitRepo: Bool { get }

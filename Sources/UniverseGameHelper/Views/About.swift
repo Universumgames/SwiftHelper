@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import StoreKit
 
 public struct About<base: BaseDefinition, colors: ColorDefinition, install: InstallationDefinitions, styling: StylingDefinition>: View {
     @State private var showInfo = false
@@ -13,8 +14,6 @@ public struct About<base: BaseDefinition, colors: ColorDefinition, install: Inst
     @State private var showBugreport = false
     @State private var showBugReportToast = false
     @State private var showOpeningSheet = false
-
-    public var supportCallback: (String) -> Void
 
     public var infoText: String?
 
@@ -26,7 +25,6 @@ public struct About<base: BaseDefinition, colors: ColorDefinition, install: Inst
         self.infoText = infoText
         self.additionalListElements = additionalListElements
         self.belowFootNote = belowFootNote
-        self.supportCallback = supportCallback
     }
 
     var infoContainer: some View {
@@ -98,22 +96,6 @@ public struct About<base: BaseDefinition, colors: ColorDefinition, install: Inst
                     BugreportSheet(appname: base.appName, appVersionString: install.appVersionString, bugreportLink: base.bugreportLink, secondaryBackground: colors.secondaryBackground, showThank: $showBugReportToast)
                 }
 
-                ListElement(cornerRadius: styling.defaultCornerRadius, bgColor: colors.background) {
-                    ForEach(base.supportShop()) { product in
-                        HStack {
-                            Text(product.displayName)
-                            Spacer()
-                            Text(product.description)
-                            Spacer()
-                            Button {
-                                supportCallback(product.id)
-                            } label: {
-                                Text(product.displayPrice)
-                            }
-                        }
-                    }
-                }
-
                 Link(destination: URL(string: base.bmcLink)!) {
                     ListElement(cornerRadius: styling.defaultCornerRadius, bgColor: colors.secondaryBackground) {
                         Text(String(localized: "about.support", bundle: .module))
@@ -150,7 +132,7 @@ public struct About<base: BaseDefinition, colors: ColorDefinition, install: Inst
 
 struct About_Previews: PreviewProvider {
     static var previews: some View {
-        About<PreviewDefinitions.Base, PreviewDefinitions.Colors, PreviewDefinitions.Installation, PreviewDefinitions.Styling>(supportCallback: { _ in }, belowFootNote:
+        About<PreviewDefinitions.Base, PreviewDefinitions.Colors, PreviewDefinitions.Installation, PreviewDefinitions.Styling>(belowFootNote:
             ListElement(cornerRadius: 20, bgColor: Color.gray) {
                 AnyView(
                     HStack {
