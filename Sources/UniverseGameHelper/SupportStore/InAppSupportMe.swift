@@ -7,14 +7,16 @@
 
 import StoreKit
 import SwiftUI
-import UniverseGameHelper
 
 struct InAppSupportMe: View {
     @EnvironmentObject var store: Store
     @State var showThankAlert = false
+    
+    var defaultCornerRadius: CGFloat
+    var secondaryBackground: Color
 
     var body: some View {
-        ListElement(cornerRadius: Definitions.defaultCornerRadius, bgColor: Definitions.Colors.secondaryBackground) {
+        ListElement(cornerRadius: defaultCornerRadius, bgColor: secondaryBackground) {
             VStack {
                 Text("support.title")
                     .padding()
@@ -67,7 +69,7 @@ struct InAppSupportMe: View {
 
 struct InAppSupportMe_Previews: PreviewProvider {
     static var previews: some View {
-        InAppSupportMe()
+        InAppSupportMe(defaultCornerRadius: PreviewDefinitions.Styling.defaultCornerRadius, secondaryBackground: PreviewDefinitions.Colors.secondaryBackground)
             .environmentObject(Store())
     }
 }

@@ -6,13 +6,16 @@
 //
 
 import Foundation
-import SwiftUI
 import StoreKit
+import SwiftUI
 
 class PreviewDefinitions {
     class Base: BaseDefinition {
-        
-        static var bmcLink: String { "" }
+        static var developerWebsite: String { "" }
+
+        static var appWebsite: String { "" }
+
+        static var showSupportDonations: Bool { false }
 
         static var githubLink: String { "" }
 
@@ -23,10 +26,6 @@ class PreviewDefinitions {
         static var gitRepoLink: String { "" }
 
         static var appName: String { "" }
-        
-        static func supportShop() -> [Product] {
-            []
-        }
     }
 
     class Colors: ColorDefinition {

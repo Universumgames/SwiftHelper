@@ -26,6 +26,10 @@
 
 "about.gitrepo" = "Git Repo";
 
+"about.website.developer" = "Developer Webseite";
+
+"about.website.app" = "App Webseite";
+
 "support.title" = "Unterstütze mich";
 
 "support.note" = "Mich zu unterstützen verändert nichts (abgesehen von meiner Dankbarkeit), dies ist einfach eine Spende an mich als Programmierer dieser App";

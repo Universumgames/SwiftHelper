@@ -70,43 +70,81 @@ public struct About<base: BaseDefinition, colors: ColorDefinition, install: Inst
         }
     }
 
+    var bugreport: some View {
+        Button {
+            showBugreport.toggle()
+        } label: {
+            ListElement(cornerRadius: styling.defaultCornerRadius, bgColor: colors.secondaryBackground) {
+                Text(String(localized: "about.bugreport", bundle: .module))
+                Spacer()
+            }
+        }
+        .buttonStyle(.borderless)
+        .sheet(isPresented: $showBugreport) {
+            BugreportSheet(appname: base.appName, appVersionString: install.appVersionString, bugreportLink: base.bugreportLink, secondaryBackground: colors.secondaryBackground, showThank: $showBugReportToast)
+        }
+    }
+
+    var github: some View {
+        Link(destination: URL(string: base.githubLink)!) {
+            ListElement(cornerRadius: styling.defaultCornerRadius, bgColor: colors.secondaryBackground) {
+                Text(String(localized: "about.github", bundle: .module))
+                Spacer()
+            }
+        }
+        .buttonStyle(.borderless)
+    }
+
+    var developerWebsite: some View {
+        Group {
+            if !base.developerWebsite.isEmpty {
+                Link(destination: URL(string: base.developerWebsite)!) {
+                    ListElement(cornerRadius: styling.defaultCornerRadius, bgColor: colors.secondaryBackground) {
+                        Text(String(localized: "about.website.developer", bundle: .module))
+                        Spacer()
+                    }
+                }
+                .buttonStyle(.borderless)
+            }
+        }
+    }
+
+    var appWebsite: some View {
+        Group {
+            if !base.appWebsite.isEmpty {
+                Link(destination: URL(string: base.appWebsite)!) {
+                    ListElement(cornerRadius: styling.defaultCornerRadius, bgColor: colors.secondaryBackground) {
+                        Text(String(localized: "about.website.app", bundle: .module))
+                        Spacer()
+                    }
+                }
+                .buttonStyle(.borderless)
+            }
+        }
+    }
+
+    var support: some View {
+        Group {
+            if base.showSupportDonations {
+                InAppSupportMe(defaultCornerRadius: styling.defaultCornerRadius, secondaryBackground: colors.secondaryBackground)
+            }
+        }
+    }
+
     public var body: some View {
         ScrollView {
             VStack(alignment: .leading) {
                 infoContainer
 
-                Link(destination: URL(string: base.githubLink)!) {
-                    ListElement(cornerRadius: styling.defaultCornerRadius, bgColor: colors.secondaryBackground) {
-                        Text(String(localized: "about.github", bundle: .module))
-                        Spacer()
-                    }
-                }
-                .buttonStyle(.borderless)
+                github
 
-                Button {
-                    showBugreport.toggle()
-                } label: {
-                    ListElement(cornerRadius: styling.defaultCornerRadius, bgColor: colors.secondaryBackground) {
-                        Text(String(localized: "about.bugreport", bundle: .module))
-                        Spacer()
-                    }
-                }
-                .buttonStyle(.borderless)
-                .sheet(isPresented: $showBugreport) {
-                    BugreportSheet(appname: base.appName, appVersionString: install.appVersionString, bugreportLink: base.bugreportLink, secondaryBackground: colors.secondaryBackground, showThank: $showBugReportToast)
-                }
+                developerWebsite
 
-                Link(destination: URL(string: base.bmcLink)!) {
-                    ListElement(cornerRadius: styling.defaultCornerRadius, bgColor: colors.secondaryBackground) {
-                        Text(String(localized: "about.support", bundle: .module))
-                        Spacer()
-                        Image("bmc_cup")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 50, height: 50)
-                    }
-                }
-                .buttonStyle(.borderless)
+                appWebsite
+
+                bugreport
+
+                support
 
                 if base.showGitRepo {
                     ListElement(cornerRadius: styling.defaultCornerRadius, bgColor: colors.secondaryBackground) {

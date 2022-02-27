@@ -46,8 +46,11 @@ public protocol ColorDefinition {
 public protocol BaseDefinition {
     associatedtype createdByType: View
 
-    static var bmcLink: String { get }
     static var githubLink: String { get }
+    static var developerWebsite: String { get }
+    static var appWebsite: String { get }
+
+    static var showSupportDonations: Bool { get }
 
     static var bugreportLink: String { get }
 
