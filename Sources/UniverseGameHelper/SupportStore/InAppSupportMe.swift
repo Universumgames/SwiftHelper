@@ -8,14 +8,14 @@
 import StoreKit
 import SwiftUI
 
-struct InAppSupportMe: View {
+public struct InAppSupportMe: View {
     @EnvironmentObject var store: Store
     @State var showThankAlert = false
     
-    var defaultCornerRadius: CGFloat
-    var secondaryBackground: Color
+    public var defaultCornerRadius: CGFloat
+    public var secondaryBackground: Color
 
-    var body: some View {
+    public var body: some View {
         ListElement(cornerRadius: defaultCornerRadius, bgColor: secondaryBackground) {
             VStack {
                 Text("support.title")
@@ -48,7 +48,7 @@ struct InAppSupportMe: View {
     }
 
     @ViewBuilder
-    func buyButton(support: Product) -> some View {
+    public func buyButton(support: Product) -> some View {
         Button {
             Task {
                 do {

@@ -12,13 +12,13 @@ public enum StoreError: Error {
     case failedVerification
 }
 
-class Store: ObservableObject {
+public class Store: ObservableObject {
     @Published private(set) var supportLevels: [Product]
     @Published private(set) var purchasedIdentifiers = Set<String>()
 
-    var updateListenerTask: Task<Void, Error>?
+    public var updateListenerTask: Task<Void, Error>?
 
-    init() {
+    public init() {
         supportLevels = []
         updateListenerTask = listenForTransactions()
         Task {
@@ -26,7 +26,7 @@ class Store: ObservableObject {
         }
     }
 
-    func listenForTransactions() -> Task<Void, Error> {
+    public func listenForTransactions() -> Task<Void, Error> {
         return Task.detached {
             // Iterate through any transactions which didn't come from a direct call to `purchase()`.
             for await result in Transaction.updates {
@@ -47,7 +47,7 @@ class Store: ObservableObject {
     }
 
     @MainActor
-    func requestProducts() async {
+    public func requestProducts() async {
         do {
             // Request products from the App Store using the identifiers defined in the Products.plist file.
             let storeProducts = try await Product.products(for: SupportStoreKitKey.allCases.map { $0.rawValue })
@@ -72,7 +72,7 @@ class Store: ObservableObject {
         }
     }
 
-    func purchase(_ product: Product) async throws -> Transaction? {
+    public func purchase(_ product: Product) async throws -> Transaction? {
         // Begin a purchase.
         let result = try await product.purchase()
 
@@ -94,7 +94,7 @@ class Store: ObservableObject {
         }
     }
 
-    func isPurchased(_ productIdentifier: String) async throws -> Bool {
+    public func isPurchased(_ productIdentifier: String) async throws -> Bool {
         // Get the most recent transaction receipt for this `productIdentifier`.
         guard let result = await Transaction.latest(for: productIdentifier) else {
             // If there is no latest transaction, the product has not been purchased.
@@ -111,7 +111,7 @@ class Store: ObservableObject {
         return transaction.revocationDate == nil && !transaction.isUpgraded
     }
 
-    func checkVerified<T>(_ result: VerificationResult<T>) throws -> T {
+    public func checkVerified<T>(_ result: VerificationResult<T>) throws -> T {
         // Check if the transaction passes StoreKit verification.
         switch result {
         case .unverified:
@@ -124,7 +124,7 @@ class Store: ObservableObject {
     }
 
     @MainActor
-    func updatePurchasedIdentifiers(_ transaction: Transaction) async {
+    public func updatePurchasedIdentifiers(_ transaction: Transaction) async {
         if transaction.revocationDate == nil {
             // If the App Store has not revoked the transaction, add it to the list of `purchasedIdentifiers`.
             purchasedIdentifiers.insert(transaction.productID)
