@@ -1,0 +1,79 @@
+{
+  "identifier" : "6464A914",
+  "nonRenewingSubscriptions" : [
+
+  ],
+  "products" : [
+    {
+      "displayPrice" : "0.99",
+      "familyShareable" : false,
+      "internalID" : "E09543D2",
+      "localizations" : [
+        {
+          "description" : "Test description",
+          "displayName" : "Buy me a Coffe",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "support.mini",
+      "referenceName" : "Coffe",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "2.99",
+      "familyShareable" : false,
+      "internalID" : "920D1A59",
+      "localizations" : [
+        {
+          "description" : "Test description",
+          "displayName" : "Buy me a piece of cake",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "support.small",
+      "referenceName" : "Piece of Cake",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "9.99",
+      "familyShareable" : false,
+      "internalID" : "CF935FA1",
+      "localizations" : [
+        {
+          "description" : "Test description",
+          "displayName" : "Buy me a whole cake",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "support.medium",
+      "referenceName" : "Cake",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "49.99",
+      "familyShareable" : false,
+      "internalID" : "F1498466",
+      "localizations" : [
+        {
+          "description" : "Test description",
+          "displayName" : "Be VERY generous...",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "support.large",
+      "referenceName" : "Generous",
+      "type" : "Consumable"
+    }
+  ],
+  "settings" : {
+    "_askToBuyEnabled" : true,
+    "_billingIssuesEnabled" : false
+  },
+  "subscriptionGroups" : [
+
+  ],
+  "version" : {
+    "major" : 1,
+    "minor" : 1
+  }
+}
