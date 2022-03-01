@@ -66,7 +66,7 @@ public class Store: ObservableObject {
             }
 
             // Sort each product category by price, lowest to highest, to update the store.
-            supportLevels = supports
+            supportLevels = supports.sorted { $0.price < $1.price }
         } catch {
             print("Failed product request: \(error)")
         }
