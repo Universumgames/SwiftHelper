@@ -4,11 +4,11 @@
 
 "bugreport.title" = "Selbsterklärender Titel";
 
-"bugreport.description" = "Bitte beschreib das aufgetretene Problem";
+"bugreport.description" = "Bitte beschreibe das aufgetretene Problem";
 
-"bugreport.mail" = "gebe deine mail addresse an für eventuelle weitere Rückfragen (Optional)";
+"bugreport.mail" = "Bitte gib deine Mail Addresse an für eventuelle weitere Rückfragen (Optional)";
 
-"bugreport.thank" = "Vielen dank für deinen Bugreport";
+"bugreport.thank" = "Vielen Dank für deinen Bugreport";
 
 "button.cancel" = "Abbrechen";
 
