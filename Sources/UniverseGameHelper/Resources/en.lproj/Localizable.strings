@@ -32,9 +32,9 @@
 
 "support.title" = "Support me";
 
-"support.note" = "Supporting me isn't going to change anything for you (besides me being thankful), this is a simple donation to me as the developer of this app (In-App Purchases couldn't be loaded)";
+"support.note" = "Supporting me isn't going to change anything for you (besides me being thankful), this is a simple donation to me as the developer of this app";
 
-"support.empty" = "Sadly you cannot support me, because something went wrong";
+"support.empty" = "Sadly you cannot support me, because something went wrong (In-App Purchases couldn't be loaded)";
 
 "support.thank" = "Thank you for supporting me so I can continue to develop this and other apps and further afford it to publish this app to the AppStore. Every cent is helping";
 

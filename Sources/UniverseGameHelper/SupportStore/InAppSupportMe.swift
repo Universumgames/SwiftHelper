@@ -18,10 +18,11 @@ public struct InAppSupportMe: View {
     public var body: some View {
         ListElement(cornerRadius: defaultCornerRadius, bgColor: secondaryBackground) {
             VStack {
-                Text("support.title")
+                Text(String(localized: "support.title", bundle: .module))
                     .padding()
-                Text("support.note")
+                Text(String(localized: "support.note", bundle: .module))
                     .font(.caption2)
+                    .padding([.bottom])
 
                 ForEach(store.supportLevels) { product in
                     HStack {
@@ -70,6 +71,7 @@ public struct InAppSupportMe: View {
 struct InAppSupportMe_Previews: PreviewProvider {
     static var previews: some View {
         InAppSupportMe(defaultCornerRadius: PreviewDefinitions.Styling.defaultCornerRadius, secondaryBackground: PreviewDefinitions.Colors.secondaryBackground)
+            .previewLayout(.sizeThatFits)
             .environmentObject(Store())
     }
 }
