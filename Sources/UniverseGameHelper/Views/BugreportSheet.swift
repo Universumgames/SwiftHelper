@@ -46,7 +46,6 @@ public struct BugreportSheet: View {
             Text(String(localized: "bugreport.sheetTitle", bundle: .module))
                 .font(.title2)
                 .allowsTightening(true)
-                .padding()
             Spacer()
             Button {
                 if checkAllRequired() {
@@ -65,14 +64,14 @@ public struct BugreportSheet: View {
     public var body: some View {
         VStack {
             header
-                .padding()
+                .padding([.bottom], 5.0)
 
             ScrollView {
                 VStack(alignment: .leading) {
                     Text(String(localized: "bugreport.note", bundle: .module))
                         .font(.footnote)
                         .lineLimit(Int.max)
-                        .padding()
+                        .padding([.top, .bottom])
                     Text(String(localized: "bugreport.title", bundle: .module))
                     TextField(String(localized: "bugreport.title", bundle: .module), text: $title)
                         .allowsTightening(true)
