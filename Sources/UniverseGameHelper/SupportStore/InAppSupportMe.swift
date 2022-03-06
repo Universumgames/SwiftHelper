@@ -72,6 +72,6 @@ struct InAppSupportMe_Previews: PreviewProvider {
     static var previews: some View {
         InAppSupportMe(defaultCornerRadius: PreviewDefinitions.Styling.defaultCornerRadius, secondaryBackground: PreviewDefinitions.Colors.secondaryBackground)
             .previewLayout(.sizeThatFits)
-            .environmentObject(Store())
+            .environmentObject( Store(productKeys: ExampleSupportStoreKitKeys.allCases.map { $0.rawValue }))
     }
 }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum SupportStoreKitKey: String, CaseIterable{
+public enum ExampleSupportStoreKitKeys: String, CaseIterable{
     case mini = "support.mini"
     case small = "support.small"
     case medium = "support.medium"

@@ -15,12 +15,16 @@ public enum StoreError: Error {
 public class Store: ObservableObject {
     @Published private(set) var supportLevels: [Product]
     @Published private(set) var purchasedIdentifiers = Set<String>()
+    
+    private var productKeys: [String]
 
     public var updateListenerTask: Task<Void, Error>?
 
-    public init() {
+    public init(productKeys: [String]) {
         supportLevels = []
+        self.productKeys = productKeys
         updateListenerTask = listenForTransactions()
+        
         Task {
             await requestProducts()
         }
@@ -50,7 +54,7 @@ public class Store: ObservableObject {
     public func requestProducts() async {
         do {
             // Request products from the App Store using the identifiers defined in the Products.plist file.
-            let storeProducts = try await Product.products(for: SupportStoreKitKey.allCases.map { $0.rawValue })
+            let storeProducts = try await Product.products(for: productKeys)
 
             var supports: [Product] = []
 
