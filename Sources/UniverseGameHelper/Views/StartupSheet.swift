@@ -15,12 +15,13 @@ public struct StartupSheet: View {
     public var freshInstallContent: String
     public var whatsNewContent: String
 
-    public var assetPathPrefix: String = "assset"
+    public var assetPathPrefix: String
 
-    public init(isFirstInstall: Bool, firstInstallMarkdown: String, whatsNewMarkdown: String) {
+    public init(isFirstInstall: Bool, firstInstallMarkdown: String, whatsNewMarkdown: String, assetPathPrefix: String = "asset") {
         self.isFirstInstall = isFirstInstall
         freshInstallContent = firstInstallMarkdown
         whatsNewContent = whatsNewMarkdown
+        self.assetPathPrefix = assetPathPrefix
     }
 
     var head: some View {
