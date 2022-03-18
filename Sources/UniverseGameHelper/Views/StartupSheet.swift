@@ -17,7 +17,11 @@ public struct StartupSheet: View {
 
     public var assetPathPrefix: String = "assset"
 
-    public var overrideFreshInstall = false
+    public init(isFirstInstall: Bool, firstInstallMarkdown: String, whatsNewMarkdown: String) {
+        self.isFirstInstall = isFirstInstall
+        freshInstallContent = firstInstallMarkdown
+        whatsNewContent = whatsNewMarkdown
+    }
 
     var head: some View {
         HStack {
@@ -37,7 +41,7 @@ public struct StartupSheet: View {
             head
             TabView {
                 Group {
-                    if isFirstInstall || overrideFreshInstall {
+                    if isFirstInstall {
                         ScrollView {
                             VStack(alignment: .leading) {
                                 Markdown(freshInstallContent)
