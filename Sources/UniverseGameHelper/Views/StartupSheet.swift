@@ -72,6 +72,6 @@ public struct StartupSheet: View {
 
 struct StartupSheet_Previews: PreviewProvider {
     static var previews: some View {
-        StartupSheet(isFirstInstall: true, freshInstallContent: "", whatsNewContent: "")
+        StartupSheet(isFirstInstall: true, firstInstallMarkdown: "", whatsNewMarkdown: "")
     }
 }
