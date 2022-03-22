@@ -53,7 +53,7 @@ public struct InAppSupportMe: View {
         Button {
             Task {
                 do {
-                    try await store.purchase(support)
+                    let _ = try await store.purchase(support)
                 } catch {
                 }
             }
