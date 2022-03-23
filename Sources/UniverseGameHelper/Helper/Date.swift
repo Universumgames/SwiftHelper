@@ -115,7 +115,7 @@ public extension Date {
             calendar.component(.year, from: self)
         }
         set {
-            self = calendar.date(bySetting: .year, value: newValue, of: self)
+            self = calendar.date(bySetting: .year, value: newValue, of: self) ?? self
         }
     }
 
@@ -124,7 +124,7 @@ public extension Date {
             calendar.component(.month, from: self)
         }
         set {
-            self = calendar.date(bySetting: .month, value: newValue, of: self)
+            self = calendar.date(bySetting: .month, value: newValue, of: self) ?? self
         }
     }
 
@@ -133,7 +133,7 @@ public extension Date {
             calendar.component(.day, from: self)
         }
         set {
-            self = calendar.date(bySetting: .day, value: newValue, of: self)
+            self = calendar.date(bySetting: .day, value: newValue, of: self) ?? self
         }
     }
 
