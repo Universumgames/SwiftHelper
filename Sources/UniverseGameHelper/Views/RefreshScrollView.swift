@@ -29,17 +29,31 @@ private struct RefreshScrollViewContainer<ContentType: View>: UIViewRepresentabl
     var height: CGFloat
 
     var refreshAction: () -> Void
-    var content: () -> ContentType
+    var content: UIView
+
+    init(width: CGFloat, height: CGFloat, refreshAction: @escaping () -> Void, @ViewBuilder content: () -> ContentType) {
+        self.width = width
+        self.height = height
+        self.refreshAction = refreshAction
+        self.content = UIHostingController(rootView: content()).view
+    }
 
     func makeUIView(context: Context) -> UIScrollView {
+        content.translatesAutoresizingMaskIntoConstraints = false
         let scrollView = UIScrollView()
         scrollView.refreshControl = UIRefreshControl()
         scrollView.refreshControl?.addTarget(context.coordinator, action: #selector(Coordinator.handleRefreshControl(sender:)), for: .valueChanged)
 
-        let refreshVC = UIHostingController(rootView: content())
-        refreshVC.view.frame = CGRect(x: 0, y: 0, width: width, height: height)
+        scrollView.addSubview(content)
 
-        scrollView.addSubview(refreshVC.view)
+        let constraints = [
+            content.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            content.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            content.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor),
+            content.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor),
+            content.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+        ]
+        scrollView.addConstraints(constraints)
 
         return scrollView
     }
