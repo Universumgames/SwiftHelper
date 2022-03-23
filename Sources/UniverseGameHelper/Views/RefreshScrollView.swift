@@ -8,7 +8,7 @@
 import SwiftUI
 import UIKit
 
-@available(*, deprecated: *)
+@available(*, deprecated)
 public struct PullToRefreshView<ContentType: View>: View {
     var refreshAction: () -> Void
     var content: () -> ContentType
