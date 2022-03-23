@@ -10,9 +10,9 @@ import UIKit
 
 public struct PullToRefreshView<ContentType: View>: View {
     var refreshAction: () -> Void
-    var content: ContentType
+    var content: () -> ContentType
 
-    public init(_ refreshAction: @escaping () -> Void, content: ContentType) {
+    public init(_ refreshAction: @escaping () -> Void, @ViewBuilder content: @escaping () -> ContentType) {
         self.refreshAction = refreshAction
         self.content = content
     }
@@ -29,14 +29,14 @@ private struct RefreshScrollViewContainer<ContentType: View>: UIViewRepresentabl
     var height: CGFloat
 
     var refreshAction: () -> Void
-    var content: ContentType
+    var content: () -> ContentType
 
     func makeUIView(context: Context) -> UIScrollView {
         let scrollView = UIScrollView()
         scrollView.refreshControl = UIRefreshControl()
         scrollView.refreshControl?.addTarget(context.coordinator, action: #selector(Coordinator.handleRefreshControl(sender:)), for: .valueChanged)
 
-        let refreshVC = UIHostingController(rootView: content)
+        let refreshVC = UIHostingController(rootView: content())
         refreshVC.view.frame = CGRect(x: 0, y: 0, width: width, height: height)
 
         scrollView.addSubview(refreshVC.view)
