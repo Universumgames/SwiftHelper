@@ -61,6 +61,21 @@ public extension Date {
         return date
     }
 
+    static func from(year: Int, month: Int, day: Int, hour: Int, minute: Int, second: Int) -> Date {
+        let gregorianCalendar = NSCalendar(calendarIdentifier: .gregorian)!
+
+        var dateComponents = DateComponents()
+        dateComponents.year = year
+        dateComponents.month = month
+        dateComponents.day = day
+        dateComponents.hour = hour
+        dateComponents.minute = minute
+        dateComponents.second = second
+
+        let date = gregorianCalendar.date(from: dateComponents)!
+        return date
+    }
+
     static func getDaysOfMonth(year: Int, month: Int) -> Int {
         return from(year: year, month: month, day: 1).endOfMonth().day - 1
     }
@@ -78,8 +93,13 @@ public extension Date {
     }
 
     var time: Time {
-        let comp = calendar.dateComponents([.hour, .minute, .second], from: self)
-        return Time(hour: comp.hour ?? 0, minute: comp.minute ?? 0, second: comp.second ?? 0)
+        get {
+            let comp = calendar.dateComponents([.hour, .minute, .second], from: self)
+            return Time(hour: comp.hour ?? 0, minute: comp.minute ?? 0, second: comp.second ?? 0)
+        }
+        set {
+            self = Date.from(year: year, month: month, day: day, hour: newValue.hour, minute: newValue.minute, second: newValue.second)
+        }
     }
 
     static let totalSecondsDay = 24 * 60 * 60
@@ -119,11 +139,11 @@ public extension Date {
     }
 }
 
-struct SmallDateComponents: Comparable{
+struct SmallDateComponents: Comparable {
     let year: Int?
     let month: Int?
     let day: Int?
-    
+
     public static func < (lhs: SmallDateComponents, rhs: SmallDateComponents) -> Bool {
         return lhs.year ?? 0 < rhs.year ?? 0 && lhs.month ?? 0 < rhs.month ?? 0 && lhs.day ?? 0 < rhs.day ?? 0
     }
@@ -131,10 +151,10 @@ struct SmallDateComponents: Comparable{
     public static func > (lhs: SmallDateComponents, rhs: SmallDateComponents) -> Bool {
         return lhs.year ?? 0 > rhs.year ?? 0 && lhs.month ?? 0 > rhs.month ?? 0 && lhs.day ?? 0 > rhs.day ?? 0
     }
-    
+
     init(_ components: DateComponents) {
-        self.year = components.year
-        self.month = components.month
-        self.day = components.day
+        year = components.year
+        month = components.month
+        day = components.day
     }
 }
