@@ -8,6 +8,7 @@
 import SwiftUI
 import UIKit
 
+@available(*, deprecated: *)
 public struct PullToRefreshView<ContentType: View>: View {
     var refreshAction: () -> Void
     var content: () -> ContentType
@@ -31,7 +32,7 @@ private struct RefreshScrollViewContainer<ContentType: View>: UIViewRepresentabl
     var refreshAction: () -> Void
     var content: UIView
 
-    init(width: CGFloat, height: CGFloat, refreshAction: @escaping () -> Void, @ViewBuilder content: () -> ContentType) {
+    init(width: CGFloat, height: CGFloat, refreshAction: @escaping () -> Void, @ViewBuilder content: @escaping () -> ContentType) {
         self.width = width
         self.height = height
         self.refreshAction = refreshAction
@@ -58,7 +59,9 @@ private struct RefreshScrollViewContainer<ContentType: View>: UIViewRepresentabl
         return scrollView
     }
 
-    func updateUIView(_ uiView: UIScrollView, context: Context) {}
+    func updateUIView(_ uiView: UIScrollView, context: Context){
+        
+    }
 
     func makeCoordinator() -> Coordinator<ContentType> {
         Coordinator(self, refreshAction: refreshAction)
