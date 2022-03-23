@@ -111,15 +111,30 @@ public extension Date {
     }
 
     var year: Int {
-        calendar.component(.year, from: self)
+        get {
+            calendar.component(.year, from: self)
+        }
+        set {
+            self = calendar.date(bySetting: .year, value: newValue, of: self)
+        }
     }
 
     var month: Int {
-        calendar.component(.month, from: self)
+        get {
+            calendar.component(.month, from: self)
+        }
+        set {
+            self = calendar.date(bySetting: .month, value: newValue, of: self)
+        }
     }
 
     var day: Int {
-        calendar.component(.day, from: self)
+        get {
+            calendar.component(.day, from: self)
+        }
+        set {
+            self = calendar.date(bySetting: .day, value: newValue, of: self)
+        }
     }
 
     func startOfDay() -> Date {
