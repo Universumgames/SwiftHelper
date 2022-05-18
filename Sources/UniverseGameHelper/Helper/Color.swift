@@ -40,7 +40,8 @@ public extension Color {
     }
 
     func toHex() -> String {
-        
-        return self.description.substring(1, 7)
+        return String.hexFromInt(number: cgColor?.components[0]) +
+            String.hexFromInt(number: cgColor?.components[1]) +
+            String.hexFromInt(number: cgColor?.components[2])
     }
 }

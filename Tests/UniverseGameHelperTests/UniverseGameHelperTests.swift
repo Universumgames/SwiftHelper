@@ -8,5 +8,6 @@ final class UniverseGameHelperTests: XCTestCase {
         // Use XCTAssert and related functions to verify your tests produce the correct
         // results.
         print(Color.fromHex(hexString: "ff00000").toHex())
+        print(Color.fromHex(hexString: "0000000").cgColor?.components)
     }
 }
