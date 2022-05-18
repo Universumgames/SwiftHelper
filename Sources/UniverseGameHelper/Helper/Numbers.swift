@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension String {
+public extension String {
     static func hexFromInt(number: Int) -> String {
         return String(format: "%02X", number)
     }

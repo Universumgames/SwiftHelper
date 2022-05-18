@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-extension Color {
+public extension Color {
     var components: (red: CGFloat, green: CGFloat, blue: CGFloat, opacity: CGFloat) {
         #if canImport(UIKit)
             typealias NativeColor = UIColor
