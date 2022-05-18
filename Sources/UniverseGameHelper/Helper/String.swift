@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public extension String {
     var wordCount: Int {
         return split { $0 == " " || $0.isNewline }.count
@@ -28,12 +27,21 @@ public extension String {
         }
         return count
     }
-    
+
     func markdownToAttributed() -> AttributedString {
         do {
             return try AttributedString(markdown: self) /// convert to AttributedString
         } catch {
             return AttributedString("Error parsing markdown: \(error)")
         }
+    }
+
+    func substring(_ startIndex: Int, _ endIndex: Int) -> String {
+        let start = self.index(self.startIndex, offsetBy: startIndex)
+        let end = self.index(self.startIndex, offsetBy: endIndex)
+        let range = start..<end
+
+        let mySubstring = self[range]
+        return String(mySubstring)
     }
 }
