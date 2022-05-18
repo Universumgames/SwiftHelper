@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 public extension Color {
-    var components: (red: CGFloat, green: CGFloat, blue: CGFloat, opacity: CGFloat) {
+    var components: (red: Int, green: Int, blue: Int, opacity: Int) {
         #if canImport(UIKit)
             typealias NativeColor = UIColor
         #elseif canImport(AppKit)
@@ -26,19 +26,21 @@ public extension Color {
             return (0, 0, 0, 0)
         }
 
-        return (r, g, b, o)
+        return (Int(r) * 255, Int(g) * 255, Int(b) * 255, Int(o) * 255)
     }
 
     static func fromHex(hexString: String) -> Color {
         let p1 = hexString.substring(0, 2)
         let p2 = hexString.substring(2, 4)
         let p3 = hexString.substring(4, 6)
-        return Color(red: Double(p1.asHexToInt()), green: Double(p2.asHexToInt()), blue: Double(p3.asHexToInt()))
+        let r = Double(p1.asHexToInt()) / 255
+        let g = Double(p2.asHexToInt()) / 255
+        let b = Double(p3.asHexToInt()) / 255
+        return Color(red: r, green: g, blue: b)
     }
 
     func toHex() -> String {
-        return String.hexFromInt(number: Int(components.red)) +
-            String.hexFromInt(number: Int(components.green)) +
-            String.hexFromInt(number: Int(components.blue))
+        
+        return self.description.substring(1, 7)
     }
 }
