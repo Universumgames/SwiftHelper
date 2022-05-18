@@ -33,15 +33,15 @@ public extension Color {
         let p1 = hexString.substring(0, 2)
         let p2 = hexString.substring(2, 4)
         let p3 = hexString.substring(4, 6)
-        let r = Double(p1.asHexToInt()) / 255
-        let g = Double(p2.asHexToInt()) / 255
-        let b = Double(p3.asHexToInt()) / 255
+        let r = Double(p1.asHexToInt()) / 255.0
+        let g = Double(p2.asHexToInt()) / 255.0
+        let b = Double(p3.asHexToInt()) / 255.0
         return Color(red: r, green: g, blue: b)
     }
 
     func toHex() -> String {
-        return String.hexFromInt(number: cgColor?.components[0]) +
-            String.hexFromInt(number: cgColor?.components[1]) +
-            String.hexFromInt(number: cgColor?.components[2])
+        return String.hexFromInt(number: Int((cgColor?.components?[0] ?? 0) * 255.0)) +
+            String.hexFromInt(number: Int((cgColor?.components?[1] ?? 0) * 255.0)) +
+            String.hexFromInt(number: Int((cgColor?.components?[2] ?? 0) * 255.0))
     }
 }
