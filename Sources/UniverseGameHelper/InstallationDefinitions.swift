@@ -24,7 +24,7 @@ public extension InstallationDefinitions{
 
     static var isNewVersion: Bool {
         let v = UserDefaults.standard.string(forKey: "version")
-        return v == nil || v != appVersionString
+        return v != nil && v != appVersionString
     }
 
     static var showStartupSheet: Bool {
