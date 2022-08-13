@@ -165,6 +165,7 @@ public struct About<base: BaseDefinition, colors: ColorDefinition, install: Inst
             }
             .padding()
         }
+        .background(colors.background)
     }
 }
 
