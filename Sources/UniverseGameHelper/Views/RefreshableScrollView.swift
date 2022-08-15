@@ -31,14 +31,6 @@ public struct RefreshableScrollView<Content: View>: View {
                             .progressViewStyle(
                                 CircularProgressViewStyle(tint: Color.purple)
                             )
-                    } else {
-                        Image("arrowDown")
-                            .resizable()
-                            .frame(width: 22, height: 22, alignment: .center)
-                            .foregroundColor(Color.purple)
-                            .padding(.top, -21)
-                            .rotationEffect(.degrees((offset < (threshold - 2)) ? 0 : 180))
-                            .animation(.easeInOut(duration: 0.5))
                     }
                     content()
                         .anchorPreference(key: OffsetPreferenceKey.self, value: .top) {
