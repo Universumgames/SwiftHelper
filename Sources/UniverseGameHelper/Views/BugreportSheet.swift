@@ -14,6 +14,7 @@ public struct BugreportSheet: View {
     public var appVersionString: String
     public var bugreportLink: String
     public var secondaryBackground: Color
+    public var primaryBackground: Color?
 
     @State private var title: String = ""
     @State private var description: String = ""
@@ -21,11 +22,12 @@ public struct BugreportSheet: View {
 
     @Binding var showThank: Bool
 
-    public init(appname: String, appVersionString: String, bugreportLink: String, secondaryBackground: Color, showThank: Binding<Bool> = .constant(false)) {
+    public init(appname: String, appVersionString: String, bugreportLink: String, secondaryBackground: Color, primaryBackground: Color? = nil, showThank: Binding<Bool> = .constant(false)) {
         self.appname = appname
         self.appVersionString = appVersionString
         self.bugreportLink = bugreportLink
         self.secondaryBackground = secondaryBackground
+        self.primaryBackground = primaryBackground
         _showThank = showThank
     }
 
@@ -103,6 +105,7 @@ public struct BugreportSheet: View {
             }
         }
         .padding()
+        .background(primaryBackground)
     }
 }
 

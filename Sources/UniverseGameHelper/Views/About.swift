@@ -81,7 +81,7 @@ public struct About<base: BaseDefinition, colors: ColorDefinition, install: Inst
         }
         .buttonStyle(.borderless)
         .sheet(isPresented: $showBugreport) {
-            BugreportSheet(appname: base.appName, appVersionString: install.appVersionString, bugreportLink: base.bugreportLink, secondaryBackground: colors.secondaryBackground, showThank: $showBugReportToast)
+            BugreportSheet(appname: base.appName, appVersionString: install.appVersionString, bugreportLink: base.bugreportLink, secondaryBackground: colors.secondaryBackground, primaryBackground: colors.background, showThank: $showBugReportToast)
         }
     }
 
