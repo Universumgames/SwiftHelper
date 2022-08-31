@@ -85,22 +85,37 @@ public struct BugreportSheet: View {
                     #if os(iOS)
                         .keyboardType(.emailAddress)
                     #endif
-                    .padding()
+                        .padding()
                         .background(secondaryBackground)
                         .cornerRadius(10)
                     Text(String(localized: "bugreport.description", bundle: .module))
                         .allowsTightening(true)
-                    TextEditor(text: $description)
-                    #if os(iOS)
-                        .textInputAutocapitalization(.sentences)
-                        .keyboardType(.default)
-                        .multilineTextAlignment(.leading)
-                    #endif
-                    .allowsTightening(true)
-                        .padding()
-                        .background(secondaryBackground)
-                        .cornerRadius(10)
-                        .frame(height: 500)
+                    if #available(iOS 16.0, *) {
+                        TextEditor(text: $description)
+#if os(iOS)
+                            .textInputAutocapitalization(.sentences)
+                            .keyboardType(.default)
+                            .multilineTextAlignment(.leading)
+#endif
+                            .allowsTightening(true)
+                            .padding()
+                            .background(secondaryBackground)
+                            .cornerRadius(10)
+                            .frame(height: 500)
+                            .scrollContentBackground(.hidden)
+                    } else {
+                        TextEditor(text: $description)
+#if os(iOS)
+                            .textInputAutocapitalization(.sentences)
+                            .keyboardType(.default)
+                            .multilineTextAlignment(.leading)
+#endif
+                            .allowsTightening(true)
+                            .padding()
+                            .background(secondaryBackground)
+                            .cornerRadius(10)
+                            .frame(height: 500)
+                    }
                 }
             }
         }
