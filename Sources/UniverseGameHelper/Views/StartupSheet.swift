@@ -41,7 +41,8 @@ public struct StartupSheet: View {
         VStack {
             head
             TabView {
-                    if isFirstInstall {
+                if isFirstInstall {
+                    VStack {
                         ScrollView {
                             VStack(alignment: .leading) {
                                 Markdown(freshInstallContent)
@@ -53,6 +54,8 @@ public struct StartupSheet: View {
                             .padding()
                         }
                     }
+                }
+                VStack {
                     ScrollView {
                         VStack(alignment: .leading) {
                             Markdown(whatsNewContent)
@@ -60,9 +63,12 @@ public struct StartupSheet: View {
                         }
                         .padding()
                     }
-            }.padding()
+                }
+            }
+            .padding()
             #if os(iOS)
-                .tabViewStyle(PageTabViewStyle())
+                .tabViewStyle(.page)
+                .indexViewStyle(.page(backgroundDisplayMode: .always))
             #endif
         }
     }
