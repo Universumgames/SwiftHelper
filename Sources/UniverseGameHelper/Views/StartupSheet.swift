@@ -41,7 +41,6 @@ public struct StartupSheet: View {
         VStack {
             head
             TabView {
-                Group {
                     if isFirstInstall {
                         ScrollView {
                             VStack(alignment: .leading) {
@@ -61,9 +60,7 @@ public struct StartupSheet: View {
                         }
                         .padding()
                     }
-                }
-                .padding()
-            }
+            }.padding()
             #if os(iOS)
                 .tabViewStyle(PageTabViewStyle())
             #endif
