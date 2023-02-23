@@ -31,7 +31,7 @@ public struct Sticky: ViewModifier {
         return 0
     }
 
-    func body(content: Content) -> some View {
+    public func body(content: Content) -> some View {
         content
             .offset(x: isStickingX && (axis == .xAxis || axis == .xyAxis) ? -frame.minX : 0,
                     y: isStickingY && (axis == .yAxis || axis == .xyAxis) ? -frame.minY : 0)
