@@ -46,7 +46,7 @@ public struct StartupSheet: View {
                         ScrollView {
                             VStack(alignment: .leading) {
                                 Markdown(freshInstallContent)
-                                    .setImageHandler(.assetImage(), forURLScheme: assetPathPrefix)
+                                    .markdownImageProvider(.asset)
                                 HStack {
                                     Spacer()
                                 }
@@ -59,7 +59,7 @@ public struct StartupSheet: View {
                     ScrollView {
                         VStack(alignment: .leading) {
                             Markdown(whatsNewContent)
-                                .setImageHandler(.assetImage(), forURLScheme: assetPathPrefix)
+                                .markdownImageProvider(.asset)
                         }
                         .padding()
                     }
