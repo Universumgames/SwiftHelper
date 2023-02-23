@@ -139,7 +139,7 @@ public extension Date {
     }
 }
 
-struct SmallDateComponents: Comparable {
+public struct SmallDateComponents: Comparable {
     let year: Int?
     let month: Int?
     let day: Int?
@@ -159,7 +159,7 @@ struct SmallDateComponents: Comparable {
     }
 }
 
-extension Formatter {
+public extension Formatter {
     static var customISO8601DateFormatter: ISO8601DateFormatter = {
         let formatter = ISO8601DateFormatter()
         formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
@@ -176,7 +176,7 @@ extension Formatter {
     }()
 }
 
-extension JSONDecoder.DateDecodingStrategy {
+public extension JSONDecoder.DateDecodingStrategy {
     static var iso8601WithFractionalSeconds = custom { decoder in
         let dateStr = try decoder.singleValueContainer().decode(String.self)
         let customIsoFormatter = Formatter.customISO8601DateFormatter
@@ -189,7 +189,7 @@ extension JSONDecoder.DateDecodingStrategy {
     }
 }
 
-extension JSONEncoder.DateEncodingStrategy {
+public extension JSONEncoder.DateEncodingStrategy {
     static var iso8601WithFractionalSeconds = custom { date, encoder in
         let dateStr = Formatter.customISO8601DateFormatter.string(from: date)
         var singleValueEnc = encoder.singleValueContainer()

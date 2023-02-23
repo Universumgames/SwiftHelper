@@ -7,20 +7,20 @@
 
 import Foundation
 
-var DefaultJSONDecoder: JSONDecoder {
+public var DefaultJSONDecoder: JSONDecoder {
     let decoder = JSONDecoder()
     decoder.dateDecodingStrategy = .iso8601WithFractionalSeconds
     return decoder
 }
 
-var DefaultJSONEncoder: JSONEncoder{
+public var DefaultJSONEncoder: JSONEncoder{
     let encoder = JSONEncoder()
     encoder.outputFormatting = [.prettyPrinted]
     encoder.dateEncodingStrategy = .iso8601WithFractionalSeconds
     return encoder
 }
 
-extension Encodable {
+public extension Encodable {
     func toData() -> Data? {
         return try? DefaultJSONEncoder.encode(self)
     }
@@ -43,7 +43,7 @@ public struct CodableIgnored<T>: Codable {
     }
 }
 
-extension KeyedDecodingContainer {
+public extension KeyedDecodingContainer {
     public func decode<T>(
         _ type: CodableIgnored<T>.Type,
         forKey key: Self.Key) throws -> CodableIgnored<T>
@@ -52,7 +52,7 @@ extension KeyedDecodingContainer {
     }
 }
 
-extension KeyedEncodingContainer {
+public extension KeyedEncodingContainer {
     public mutating func encode<T>(
         _ value: CodableIgnored<T>,
         forKey key: KeyedEncodingContainer<K>.Key) throws

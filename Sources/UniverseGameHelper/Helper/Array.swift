@@ -41,7 +41,7 @@ public extension Array {
     }
 }
 
-extension Array where Element: Equatable {
+public extension Array where Element: Equatable {
     mutating func move(_ element: Element, to newIndex: Index) {
         if let oldIndex: Int = firstIndex(of: element) { move(from: oldIndex, to: newIndex) }
     }

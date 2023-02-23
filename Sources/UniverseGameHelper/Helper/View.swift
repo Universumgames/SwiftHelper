@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct Sticky: ViewModifier {
+public struct Sticky: ViewModifier {
     var axis: StickyAxis
     var coordinateSpace: String
     @State private var frame: CGRect = .zero
@@ -46,17 +46,17 @@ struct Sticky: ViewModifier {
     }
 }
 
-enum StickyAxis {
+public enum StickyAxis {
     case yAxis, xAxis, xyAxis
 }
 
-extension View {
+public extension View {
     func sticky(_ axis: StickyAxis = .yAxis, coordinateSpace space: String = "container") -> some View {
         modifier(Sticky(axis: axis, coordinateSpace: space))
     }
 }
 
-extension TupleView {
+public extension TupleView {
     var getViews: [AnyView] {
         makeArray(from: value)
     }

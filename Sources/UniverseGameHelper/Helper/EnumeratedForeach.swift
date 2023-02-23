@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct EnumeratedForEach<ItemType, ContentView: View>: View {
+public struct EnumeratedForEach<ItemType, ContentView: View>: View {
     let data: [ItemType]
     let content: (Int, ItemType) -> ContentView
     
