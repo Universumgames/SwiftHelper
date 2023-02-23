@@ -44,7 +44,7 @@ public struct CodableIgnored<T>: Codable {
 }
 
 public extension KeyedDecodingContainer {
-    public func decode<T>(
+    func decode<T>(
         _ type: CodableIgnored<T>.Type,
         forKey key: Self.Key) throws -> CodableIgnored<T>
     {
@@ -53,7 +53,7 @@ public extension KeyedDecodingContainer {
 }
 
 public extension KeyedEncodingContainer {
-    public mutating func encode<T>(
+    mutating func encode<T>(
         _ value: CodableIgnored<T>,
         forKey key: KeyedEncodingContainer<K>.Key) throws
     {
