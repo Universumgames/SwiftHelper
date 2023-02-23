@@ -44,4 +44,42 @@ public extension String {
         let mySubstring = self[range]
         return String(mySubstring)
     }
+    
+    func test(_ regex: String) -> Bool {
+        do {
+            let reg = try NSRegularExpression(pattern: regex)
+            let range = NSRange(location: 0, length: count)
+            return reg.firstMatch(in: self, options: [], range: range) != nil
+        } catch {
+            return false
+        }
+    }
+
+    func percentEncoded() -> String {
+        return addingPercentEncoding(withAllowedCharacters: .urlQueryValueAllowed) ?? ""
+    }
+
+    var localized: String {
+        return NSLocalizedString(self, comment: "")
+    }
+
+    func replace(_ regex: String, with: String) -> String {
+        if #available(iOS 16.0, *) {
+            return replacing(regex, with: with)
+        } else {
+            return replacingOccurrences(of: " ", with: "")
+        }
+    }
+
+    // javascript equivalent
+    func toLowerCase() -> String {
+        return lowercased()
+    }
+    
+    // javascript equivalent
+    func includes(_ other: any StringProtocol) -> Bool{
+        return contains(other)
+    }
+    
+    
 }

@@ -158,3 +158,41 @@ struct SmallDateComponents: Comparable {
         day = components.day
     }
 }
+
+extension Formatter {
+    static var customISO8601DateFormatter: ISO8601DateFormatter = {
+        let formatter = ISO8601DateFormatter()
+        formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        return formatter
+    }()
+
+    static let yyyyMMdd: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        formatter.calendar = Calendar(identifier: .iso8601)
+        formatter.timeZone = TimeZone(secondsFromGMT: 0)
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        return formatter
+    }()
+}
+
+extension JSONDecoder.DateDecodingStrategy {
+    static var iso8601WithFractionalSeconds = custom { decoder in
+        let dateStr = try decoder.singleValueContainer().decode(String.self)
+        let customIsoFormatter = Formatter.customISO8601DateFormatter
+        if let date = customIsoFormatter.date(from: dateStr) {
+            return date
+        }
+        throw DecodingError.dataCorrupted(
+            DecodingError.Context(codingPath: decoder.codingPath,
+                                  debugDescription: "Invalid date"))
+    }
+}
+
+extension JSONEncoder.DateEncodingStrategy {
+    static var iso8601WithFractionalSeconds = custom { date, encoder in
+        let dateStr = Formatter.customISO8601DateFormatter.string(from: date)
+        var singleValueEnc = encoder.singleValueContainer()
+        try singleValueEnc.encode(dateStr)
+    }
+}
