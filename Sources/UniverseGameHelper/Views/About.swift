@@ -36,6 +36,34 @@ public struct About<base: BaseDefinition, colors: ColorDefinition, install: Inst
         self.additionalListElementContainer = [AnyView(additionalListElementContainer())]
         self.belowFootNote = [AnyView(belowFootNote())]
     }
+    
+    public init<List>(infoText: String? = nil,
+                             @ViewBuilder additionalListElementContainer: @escaping () -> TupleView<List>) {
+        self.infoText = infoText
+        self.additionalListElementContainer = additionalListElementContainer().getViews
+        self.belowFootNote = []
+    }
+    
+    public init<List: View>(infoText: String? = nil,
+                                         @ViewBuilder additionalListElementContainer: @escaping () -> List) {
+        self.infoText = infoText
+        self.additionalListElementContainer = [AnyView(additionalListElementContainer())]
+        self.belowFootNote = []
+    }
+    
+    public init<Below>(infoText: String? = nil,
+                             @ViewBuilder belowFootNote: @escaping () -> TupleView<Below>) {
+        self.infoText = infoText
+        self.additionalListElementContainer = []
+        self.belowFootNote = belowFootNote().getViews
+    }
+    
+    public init<Below: View>(infoText: String? = nil,
+                                         @ViewBuilder belowFootNote: @escaping () -> Below) {
+        self.infoText = infoText
+        self.additionalListElementContainer = []
+        self.belowFootNote = [AnyView(belowFootNote())]
+    }
 
     public init(infoText: String? = nil) {
         self.infoText = infoText
