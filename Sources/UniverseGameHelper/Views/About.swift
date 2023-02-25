@@ -8,7 +8,7 @@
 import StoreKit
 import SwiftUI
 
-public struct About<base: BaseDefinition, colors: ColorDefinition, install: InstallationDefinitions, styling: StylingDefinition, additionalElementContainerType: View, belowFootNoteType: View>: View {
+public struct About<base: BaseDefinition, colors: ColorDefinition, install: InstallationDefinitions, styling: StylingDefinition>: View {
     @State private var showInfo = false
     @State private var showAlert = false
     @State private var showBugreport = false
@@ -17,14 +17,30 @@ public struct About<base: BaseDefinition, colors: ColorDefinition, install: Inst
 
     public var infoText: String?
 
-    public var additionalListElementContainer: additionalElementContainerType?
+    public var additionalListElementContainer: [AnyView]
 
-    public var belowFootNote: belowFootNoteType?
+    public var belowFootNote: [AnyView]
 
-    public init(infoText: String? = nil, additionalListElementContainer: additionalElementContainerType? = nil, belowFootNote: belowFootNoteType? = nil) {
+    public init<List, Below>(infoText: String? = nil,
+                             @ViewBuilder additionalListElementContainer: @escaping () -> TupleView<List>,
+                             @ViewBuilder belowFootNote: @escaping () -> TupleView<Below>) {
         self.infoText = infoText
-        self.additionalListElementContainer = additionalListElementContainer
-        self.belowFootNote = belowFootNote
+        self.additionalListElementContainer = additionalListElementContainer().getViews
+        self.belowFootNote = belowFootNote().getViews
+    }
+
+    public init<List: View, Below: View>(infoText: String? = nil,
+                                         @ViewBuilder additionalListElementContainer: @escaping () -> List,
+                                         @ViewBuilder belowFootNote: @escaping () -> Below) {
+        self.infoText = infoText
+        self.additionalListElementContainer = [AnyView(additionalListElementContainer())]
+        self.belowFootNote = [AnyView(belowFootNote())]
+    }
+
+    public init(infoText: String? = nil) {
+        self.infoText = infoText
+        additionalListElementContainer = []
+        belowFootNote = []
     }
 
     var infoContainer: some View {
@@ -153,14 +169,14 @@ public struct About<base: BaseDefinition, colors: ColorDefinition, install: Inst
                     }
                 }
 
-                if let additionalListElementContainer = additionalListElementContainer {
-                    additionalListElementContainer
+                ForEach(0 ..< additionalListElementContainer.count, id: \.self) { index in
+                    additionalListElementContainer[index]
                 }
 
                 footnote
 
-                if let belowFootNote = belowFootNote {
-                    belowFootNote
+                ForEach(0 ..< belowFootNote.count, id: \.self) { index in
+                    belowFootNote[index]
                 }
             }
             .padding()
@@ -171,14 +187,16 @@ public struct About<base: BaseDefinition, colors: ColorDefinition, install: Inst
 
 struct About_Previews: PreviewProvider {
     static var previews: some View {
-        About<PreviewDefinitions.Base, PreviewDefinitions.Colors, PreviewDefinitions.Installation, PreviewDefinitions.Styling, AnyView, ListElement<AnyView>>(belowFootNote:
-            ListElement(cornerRadius: 20, bgColor: Color.gray) {
-                AnyView(
-                    HStack {
-                        Text("hi")
-                    }
-                )
+        About<PreviewDefinitions.Base, PreviewDefinitions.Colors, PreviewDefinitions.Installation, PreviewDefinitions.Styling>
+        {}
+    belowFootNote: {
+                ListElement(cornerRadius: 20, bgColor: Color.gray) {
+                    AnyView(
+                        HStack {
+                            Text("hi")
+                        }
+                    )
+                }
             }
-        )
     }
 }
