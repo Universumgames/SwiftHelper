@@ -22,11 +22,11 @@ public struct About<base: BaseDefinition, colors: ColorDefinition, install: Inst
     public var belowFootNote: [AnyView]
 
     public init<ListElements, BelowElements>(infoText: String? = nil,
-                                             @ViewBuilder additionalListElementContainer: @escaping () -> TupleView<ListElements>,
-                                             @ViewBuilder belowFootNote: @escaping () -> TupleView<BelowElements>) {
+                                             @ViewBuilder additionalListElements: @escaping () -> TupleView<ListElements>,
+                                             @ViewBuilder belowFootNotes: @escaping () -> TupleView<BelowElements>) {
         self.infoText = infoText
-        self.additionalListElementContainer = additionalListElementContainer().getViews
-        self.belowFootNote = belowFootNote().getViews
+        self.additionalListElementContainer = additionalListElements().getViews
+        self.belowFootNote = belowFootNotes().getViews
     }
 
     public init<ListElements: View, BelowElements: View>(infoText: String? = nil,
@@ -38,9 +38,9 @@ public struct About<base: BaseDefinition, colors: ColorDefinition, install: Inst
     }
 
     public init<ListElements>(infoText: String? = nil,
-                              @ViewBuilder additionalListElementContainer: @escaping () -> TupleView<ListElements>) {
+                              @ViewBuilder additionalListElements: @escaping () -> TupleView<ListElements>) {
         self.infoText = infoText
-        self.additionalListElementContainer = additionalListElementContainer().getViews
+        self.additionalListElementContainer = additionalListElements().getViews
         belowFootNote = []
     }
 
@@ -52,10 +52,10 @@ public struct About<base: BaseDefinition, colors: ColorDefinition, install: Inst
     }
 
     public init<BelowElements>(infoText: String? = nil,
-                               @ViewBuilder belowFootNote: @escaping () -> TupleView<BelowElements>) {
+                               @ViewBuilder belowFootNotes: @escaping () -> TupleView<BelowElements>) {
         self.infoText = infoText
         additionalListElementContainer = []
-        self.belowFootNote = belowFootNote().getViews
+        self.belowFootNote = belowFootNotes().getViews
     }
 
     public init<BelowElements: View>(infoText: String? = nil,
