@@ -21,47 +21,47 @@ public struct About<base: BaseDefinition, colors: ColorDefinition, install: Inst
 
     public var belowFootNote: [AnyView]
 
-    public init<List, Below>(infoText: String? = nil,
-                             @ViewBuilder additionalListElementContainer: @escaping () -> TupleView<List>,
-                             @ViewBuilder belowFootNote: @escaping () -> TupleView<Below>) {
+    public init<ListElements, BelowElements>(infoText: String? = nil,
+                                             @ViewBuilder additionalListElementContainer: @escaping () -> TupleView<ListElements>,
+                                             @ViewBuilder belowFootNote: @escaping () -> TupleView<BelowElements>) {
         self.infoText = infoText
         self.additionalListElementContainer = additionalListElementContainer().getViews
         self.belowFootNote = belowFootNote().getViews
     }
 
-    public init<List: View, Below: View>(infoText: String? = nil,
-                                         @ViewBuilder additionalListElementContainer: @escaping () -> List,
-                                         @ViewBuilder belowFootNote: @escaping () -> Below) {
+    public init<ListElements: View, BelowElements: View>(infoText: String? = nil,
+                                                         @ViewBuilder additionalListElementContainer: @escaping () -> ListElements,
+                                                         @ViewBuilder belowFootNote: @escaping () -> BelowElements) {
         self.infoText = infoText
         self.additionalListElementContainer = [AnyView(additionalListElementContainer())]
         self.belowFootNote = [AnyView(belowFootNote())]
     }
-    
-    public init<List>(infoText: String? = nil,
-                             @ViewBuilder additionalListElementContainer: @escaping () -> TupleView<List>) {
+
+    public init<ListElements>(infoText: String? = nil,
+                              @ViewBuilder additionalListElementContainer: @escaping () -> TupleView<ListElements>) {
         self.infoText = infoText
         self.additionalListElementContainer = additionalListElementContainer().getViews
-        self.belowFootNote = []
+        belowFootNote = []
     }
-    
-    public init<List: View>(infoText: String? = nil,
-                                         @ViewBuilder additionalListElementContainer: @escaping () -> List) {
+
+    public init<ListElements: View>(infoText: String? = nil,
+                                    @ViewBuilder additionalListElementContainer: @escaping () -> ListElements) {
         self.infoText = infoText
         self.additionalListElementContainer = [AnyView(additionalListElementContainer())]
-        self.belowFootNote = []
+        belowFootNote = []
     }
-    
-    public init<Below>(infoText: String? = nil,
-                             @ViewBuilder belowFootNote: @escaping () -> TupleView<Below>) {
+
+    public init<BelowElements>(infoText: String? = nil,
+                               @ViewBuilder belowFootNote: @escaping () -> TupleView<BelowElements>) {
         self.infoText = infoText
-        self.additionalListElementContainer = []
+        additionalListElementContainer = []
         self.belowFootNote = belowFootNote().getViews
     }
-    
-    public init<Below: View>(infoText: String? = nil,
-                                         @ViewBuilder belowFootNote: @escaping () -> Below) {
+
+    public init<BelowElements: View>(infoText: String? = nil,
+                                     @ViewBuilder belowFootNote: @escaping () -> BelowElements) {
         self.infoText = infoText
-        self.additionalListElementContainer = []
+        additionalListElementContainer = []
         self.belowFootNote = [AnyView(belowFootNote())]
     }
 
