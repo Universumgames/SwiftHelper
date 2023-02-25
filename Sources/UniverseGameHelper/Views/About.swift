@@ -7,6 +7,7 @@
 
 import StoreKit
 import SwiftUI
+import MarkdownUI
 
 public struct About<base: BaseDefinition, colors: ColorDefinition, install: InstallationDefinitions, styling: StylingDefinition>: View {
     @State private var showInfo = false
@@ -88,7 +89,7 @@ public struct About<base: BaseDefinition, colors: ColorDefinition, install: Inst
 
                         if showInfo {
                             VStack {
-                                Text(infoText)
+                                Markdown(infoText)
                             }
                             .padding()
                             .transition(.scale.animation(.easeInOut(duration: 0.25)))
