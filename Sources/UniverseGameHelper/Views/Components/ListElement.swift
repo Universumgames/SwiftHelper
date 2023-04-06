@@ -19,9 +19,16 @@ public struct ListElement<Content: View>: View {
     }
 
     public var body: some View {
-        HStack {
+        VStack {
             Group(content: content)
         }
+        .frame(
+            minWidth: 0,
+            maxWidth: .infinity,
+            minHeight: 0,
+            maxHeight: .infinity,
+            alignment: .topLeading
+        )
         .padding()
         .background(bgColor)
         .cornerRadius(cornerRadius)
