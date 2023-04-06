@@ -5,9 +5,9 @@
 //  Created by Tom Arlt on 25.01.22.
 //
 
+import MarkdownUI
 import StoreKit
 import SwiftUI
-import MarkdownUI
 
 public struct About<base: BaseDefinition, colors: ColorDefinition, install: InstallationDefinitions, styling: StylingDefinition>: View {
     @State private var showInfo = false
@@ -26,8 +26,8 @@ public struct About<base: BaseDefinition, colors: ColorDefinition, install: Inst
                                              @ViewBuilder additionalListElements: @escaping () -> TupleView<ListElements>,
                                              @ViewBuilder belowFootNotes: @escaping () -> TupleView<BelowElements>) {
         self.infoText = infoText
-        self.additionalListElementContainer = additionalListElements().getViews
-        self.belowFootNote = belowFootNotes().getViews
+        additionalListElementContainer = additionalListElements().getViews
+        belowFootNote = belowFootNotes().getViews
     }
 
     public init<ListElements: View, BelowElements: View>(infoText: String? = nil,
@@ -41,7 +41,7 @@ public struct About<base: BaseDefinition, colors: ColorDefinition, install: Inst
     public init<ListElements>(infoText: String? = nil,
                               @ViewBuilder additionalListElements: @escaping () -> TupleView<ListElements>) {
         self.infoText = infoText
-        self.additionalListElementContainer = additionalListElements().getViews
+        additionalListElementContainer = additionalListElements().getViews
         belowFootNote = []
     }
 
@@ -56,7 +56,7 @@ public struct About<base: BaseDefinition, colors: ColorDefinition, install: Inst
                                @ViewBuilder belowFootNotes: @escaping () -> TupleView<BelowElements>) {
         self.infoText = infoText
         additionalListElementContainer = []
-        self.belowFootNote = belowFootNotes().getViews
+        belowFootNote = belowFootNotes().getViews
     }
 
     public init<BelowElements: View>(infoText: String? = nil,
@@ -76,24 +76,22 @@ public struct About<base: BaseDefinition, colors: ColorDefinition, install: Inst
         Group {
             if let infoText = infoText {
                 ListElement(cornerRadius: styling.defaultCornerRadius, bgColor: colors.secondaryBackground) {
-                    VStack {
-                        HStack {
-                            Text(String(localized: "about.button.information", bundle: .module))
-                            Spacer()
-                            Image(systemName: "chevron.right")
-                                .rotationEffect(.degrees(showInfo ? 90 : 0))
-                                .animation(.easeInOut, value: showInfo)
-                        }
-                        .background(colors.secondaryBackground)
-                        .cornerRadius(styling.defaultCornerRadius)
+                    HStack {
+                        Text(String(localized: "about.button.information", bundle: .module))
+                        Spacer()
+                        Image(systemName: "chevron.right")
+                            .rotationEffect(.degrees(showInfo ? 90 : 0))
+                            .animation(.easeInOut, value: showInfo)
+                    }
+                    .background(colors.secondaryBackground)
+                    .cornerRadius(styling.defaultCornerRadius)
 
-                        if showInfo {
-                            VStack {
-                                Markdown(infoText)
-                            }
-                            .padding()
-                            .transition(.scale.animation(.easeInOut(duration: 0.25)))
+                    if showInfo {
+                        VStack {
+                            Markdown(infoText)
                         }
+                        .padding()
+                        .transition(.scale.animation(.easeInOut(duration: 0.25)))
                     }
                 }
                 .onTapGesture {
@@ -121,7 +119,6 @@ public struct About<base: BaseDefinition, colors: ColorDefinition, install: Inst
         } label: {
             ListElement(cornerRadius: styling.defaultCornerRadius, bgColor: colors.secondaryBackground) {
                 Text(String(localized: "about.bugreport", bundle: .module))
-                Spacer()
             }
         }
         .buttonStyle(.borderless)
@@ -134,7 +131,6 @@ public struct About<base: BaseDefinition, colors: ColorDefinition, install: Inst
         Link(destination: URL(string: base.githubLink)!) {
             ListElement(cornerRadius: styling.defaultCornerRadius, bgColor: colors.secondaryBackground) {
                 Text(String(localized: "about.github", bundle: .module))
-                Spacer()
             }
         }
         .buttonStyle(.borderless)
@@ -146,7 +142,6 @@ public struct About<base: BaseDefinition, colors: ColorDefinition, install: Inst
                 Link(destination: URL(string: base.developerWebsite)!) {
                     ListElement(cornerRadius: styling.defaultCornerRadius, bgColor: colors.secondaryBackground) {
                         Text(String(localized: "about.website.developer", bundle: .module))
-                        Spacer()
                     }
                 }
                 .buttonStyle(.borderless)
@@ -160,7 +155,6 @@ public struct About<base: BaseDefinition, colors: ColorDefinition, install: Inst
                 Link(destination: URL(string: base.appWebsite)!) {
                     ListElement(cornerRadius: styling.defaultCornerRadius, bgColor: colors.secondaryBackground) {
                         Text(String(localized: "about.website.app", bundle: .module))
-                        Spacer()
                     }
                 }
                 .buttonStyle(.borderless)
@@ -194,7 +188,6 @@ public struct About<base: BaseDefinition, colors: ColorDefinition, install: Inst
                 if base.showGitRepo {
                     ListElement(cornerRadius: styling.defaultCornerRadius, bgColor: colors.secondaryBackground) {
                         Text(String(localized: "about.gitrepo", bundle: .module))
-                        Spacer()
                     }
                 }
 
@@ -220,11 +213,7 @@ struct About_Previews: PreviewProvider {
         {}
     belowFootNote: {
                 ListElement(cornerRadius: 20, bgColor: Color.gray) {
-                    AnyView(
-                        HStack {
-                            Text("hi")
-                        }
-                    )
+                    Text("hi")
                 }
             }
     }
