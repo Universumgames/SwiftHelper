@@ -77,12 +77,12 @@ public extension View {
     }
 
     /// In case u need a modifier
-    func refreshable(action: @escaping () -> Void) -> some View {
-        modifier(RefreshableScrollViewModifier(action: action))
-    }
+    //func refreshable(action: @escaping () -> Void) -> some View {
+    //    modifier(RefreshableScrollViewModifier(action: action))
+    //}
 }
 
-struct RefreshableScrollViewModifier: ViewModifier {
+/*struct RefreshableScrollViewModifier: ViewModifier {
     var action: () -> Void
     @State private var isRefreshing: Bool = false
 
@@ -97,3 +97,4 @@ struct RefreshableScrollViewModifier: ViewModifier {
         }
     }
 }
+*/
