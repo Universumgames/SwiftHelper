@@ -71,10 +71,7 @@ fileprivate struct OffsetPreferenceKey: PreferenceKey {
 }
 
 public extension View {
-    func hapticSuccess() {
-        let generator = UINotificationFeedbackGenerator()
-        generator.notificationOccurred(.success)
-    }
+    
 
     /// In case u need a modifier
     //func refreshable(action: @escaping () -> Void) -> some View {
