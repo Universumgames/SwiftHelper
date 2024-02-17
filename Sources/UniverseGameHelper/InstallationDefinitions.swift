@@ -1,6 +1,6 @@
 //
 //  InstallationDefinitions.swift
-//  
+//
 //
 //  Created by Tom Arlt on 23.02.22.
 //
@@ -8,9 +8,9 @@
 import Foundation
 import SwiftUI
 
-public extension InstallationDefinitions{
+public extension InstallationDefinitions {
     static var isTestflightInstallation: Bool {
-        return Bundle.main.appStoreReceiptURL?.lastPathComponent == "sandboxReceipt"
+        Bundle.main.appStoreReceiptURL?.lastPathComponent == "sandboxReceipt"
     }
 
     static var isFirstInstall: Bool {
@@ -28,7 +28,7 @@ public extension InstallationDefinitions{
     }
 
     static var showStartupSheet: Bool {
-        return isFirstInstall || isNewVersion
+        isFirstInstall || isNewVersion
     }
 
     static var testFlightNote: some View {
@@ -47,15 +47,15 @@ public extension InstallationDefinitions{
     }
 
     static var releaseVersionNumber: String? {
-        return Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+        Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
     }
 
     static var buildVersionNumber: String? {
-        return Bundle.main.infoDictionary?["CFBundleVersion"] as? String
+        Bundle.main.infoDictionary?["CFBundleVersion"] as? String
     }
 
     static var appVersionString: String {
-        return "Version \(releaseVersionNumber ?? "unkown")\(buildVersionNumber != nil ? " build" + buildVersionNumber! : "")"
+        "Version \(releaseVersionNumber ?? "unkown")\(buildVersionNumber != nil ? " build" + buildVersionNumber! : "")"
     }
 
     static var appVersionNote: some View {
@@ -65,5 +65,9 @@ public extension InstallationDefinitions{
                 .font(.footnote)
             Spacer()
         }
+    }
+
+    static var appName: String {
+        Bundle.main.infoDictionary?["CFBundleName"] as? String ?? "unkown"
     }
 }
