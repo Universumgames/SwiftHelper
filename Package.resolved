@@ -2,12 +2,21 @@
   "object": {
     "pins": [
       {
+        "package": "NetworkImage",
+        "repositoryURL": "https://github.com/gonzalezreal/NetworkImage",
+        "state": {
+          "branch": null,
+          "revision": "7aff8d1b31148d32c5933d75557d42f6323ee3d1",
+          "version": "6.0.0"
+        }
+      },
+      {
         "package": "swift-markdown-ui",
         "repositoryURL": "https://github.com/gonzalezreal/swift-markdown-ui",
         "state": {
           "branch": null,
-          "revision": "4392c3cefd08db10f13ffb019d7c7a4a622824f5",
-          "version": "2.0.2"
+          "revision": "ae799d015a5374708f7b4c85f3294c05f2a564e2",
+          "version": "2.3.0"
         }
       }
     ]
