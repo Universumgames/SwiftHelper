@@ -9,11 +9,9 @@ import MarkdownUI
 import StoreKit
 import SwiftUI
 
-public struct About<base: BaseDefinition, colors: ColorDefinition, install: InstallationDefinitions, styling: StylingDefinition>: View {
-    @State private var showInfo = false
+public struct About<base: BaseDefinition>: View {
+    @Environment(\.styling) var styling
     @State private var showAlert = false
-    @State private var showBugreport = false
-    @State private var showBugReportToast = false
     @State private var showOpeningSheet = false
 
     public var infoText: String?
@@ -72,80 +70,14 @@ public struct About<base: BaseDefinition, colors: ColorDefinition, install: Inst
         belowFootNote = []
     }
 
-    var infoContainer: some View {
-        Group {
-            if let infoText = infoText {
-                ListElement(cornerRadius: styling.defaultCornerRadius, bgColor: colors.secondaryBackground) {
-                    HStack {
-                        Text(String(localized: "about.button.information", bundle: .module))
-                        Spacer()
-                        Image(systemName: "chevron.right")
-                            .rotationEffect(.degrees(showInfo ? 90 : 0))
-                            .animation(.easeInOut, value: showInfo)
-                    }
-                    .background(colors.secondaryBackground)
-                    .cornerRadius(styling.defaultCornerRadius)
-
-                    if showInfo {
-                        VStack {
-                            Markdown(infoText)
-                        }
-                        .padding()
-                        .transition(.scale.animation(.easeInOut(duration: 0.25)))
-                    }
-                }
-                .onTapGesture {
-                    withAnimation {
-                        showInfo.toggle()
-                    }
-                }
-            }
-        }
-    }
-
-    var footnote: some View {
-        Group {
-            base.createdByElement
-
-            install.appVersionNote
-
-            install.testFlightNote
-        }
-    }
-
-    var bugreport: some View {
-        Button {
-            showBugreport.toggle()
-        } label: {
-            ListElement(cornerRadius: styling.defaultCornerRadius, bgColor: colors.secondaryBackground) {
-                Text(String(localized: "about.bugreport", bundle: .module))
-            }
-        }
-        .buttonStyle(.borderless)
-        .sheet(isPresented: $showBugreport) {
-            BugreportSheet(appname: base.appName, appVersionString: install.appVersionString, bugreportLink: base.bugreportLink, secondaryBackground: colors.secondaryBackground, primaryBackground: colors.background, showThank: $showBugReportToast)
-        }
-    }
-
-    var github: some View {
-        Link(destination: URL(string: base.githubLink)!) {
-            ListElement(cornerRadius: styling.defaultCornerRadius, bgColor: colors.secondaryBackground) {
-                Text(String(localized: "about.github", bundle: .module))
-            }
-        }
-        .buttonStyle(.borderless)
-    }
-
     var developerWebsite: some View {
         Group {
-            if !base.developerWebsite.isEmpty {
-                Link(destination: URL(string: base.developerWebsite)!) {
-                    ListElement(cornerRadius: styling.defaultCornerRadius, bgColor: colors.secondaryBackground) {
-                        Text(String(localized: "about.website.developer", bundle: .module))
-                    }
+            Link(destination: URL(string: DeveloperInfo.developerWebsite)!) {
+                ListElement {
+                    Text(String(localized: "about.website.developer", bundle: .module))
                 }
-                .buttonStyle(.borderless)
             }
+            .buttonStyle(.borderless)
         }
     }
 
@@ -153,7 +85,7 @@ public struct About<base: BaseDefinition, colors: ColorDefinition, install: Inst
         Group {
             if !base.appWebsite.isEmpty {
                 Link(destination: URL(string: base.appWebsite)!) {
-                    ListElement(cornerRadius: styling.defaultCornerRadius, bgColor: colors.secondaryBackground) {
+                    ListElement {
                         Text(String(localized: "about.website.app", bundle: .module))
                     }
                 }
@@ -165,7 +97,7 @@ public struct About<base: BaseDefinition, colors: ColorDefinition, install: Inst
     var support: some View {
         Group {
             if base.showSupportDonations {
-                InAppSupportMe(defaultCornerRadius: styling.defaultCornerRadius, secondaryBackground: colors.secondaryBackground)
+                InAppSupportMe(secondaryBackground: styling.colors.secondaryBackground)
             }
         }
     }
@@ -173,20 +105,22 @@ public struct About<base: BaseDefinition, colors: ColorDefinition, install: Inst
     public var body: some View {
         ScrollView {
             VStack(alignment: .leading) {
-                infoContainer
+                if let infoText = infoText {
+                    InfoContainer(infoText: infoText, defaultCornerRadius: styling.defaultCornerRadius, secondaryBackground: styling.colors.secondaryBackground)
+                }
 
-                github
+                GitHubLinkButton(secondaryBackground: styling.colors.secondaryBackground, cornerRadius: styling.defaultCornerRadius, githubLink: DeveloperInfo.githubLink)
 
                 developerWebsite
 
                 appWebsite
 
-                bugreport
+                BugreportButton(background: styling.colors.background, secondaryBackground: styling.colors.secondaryBackground, defaultCornerRadius: styling.defaultCornerRadius, bugreportLink: DeveloperInfo.bugreportLink, appName: InstallationDefinitions.appName)
 
                 support
 
                 if base.showGitRepo {
-                    ListElement(cornerRadius: styling.defaultCornerRadius, bgColor: colors.secondaryBackground) {
+                    ListElement {
                         Text(String(localized: "about.gitrepo", bundle: .module))
                     }
                 }
@@ -195,7 +129,7 @@ public struct About<base: BaseDefinition, colors: ColorDefinition, install: Inst
                     additionalListElementContainer[index]
                 }
 
-                footnote
+                Footnote()
 
                 ForEach(0 ..< belowFootNote.count, id: \.self) { index in
                     belowFootNote[index]
@@ -203,18 +137,19 @@ public struct About<base: BaseDefinition, colors: ColorDefinition, install: Inst
             }
             .padding()
         }
-        .background(colors.background)
+        .background(styling.colors.background)
     }
 }
 
-struct About_Previews: PreviewProvider {
-    static var previews: some View {
-        About<PreviewDefinitions.Base, PreviewDefinitions.Colors, PreviewDefinitions.Installation, PreviewDefinitions.Styling>
-        {}
-    belowFootNote: {
-                ListElement(cornerRadius: 20, bgColor: Color.gray) {
-                    Text("hi")
-                }
-            }
-    }
-}
+/* struct About_Previews: PreviewProvider {
+     static var previews: some View {
+         About<PreviewDefinitions.Base, PreviewDefinitions.Colors, PreviewDefinitions.Styling>
+         {}
+     belowFootNote: {
+                 ListElement(cornerRadius: 20, bgColor: Color.gray) {
+                     Text("hi")
+                 }
+             }
+     }
+ }
+ */

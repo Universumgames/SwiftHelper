@@ -11,12 +11,11 @@ import SwiftUI
 public struct InAppSupportMe: View {
     @EnvironmentObject var store: Store
     @State var showThankAlert = false
-    
-    public var defaultCornerRadius: CGFloat
-    public var secondaryBackground: Color
+
+    public var secondaryBackground: Color = .black
 
     public var body: some View {
-        ListElement(cornerRadius: defaultCornerRadius, bgColor: secondaryBackground) {
+        ListElement() {
             VStack {
                 Text(String(localized: "support.title", bundle: .module))
                     .padding()
@@ -70,7 +69,7 @@ public struct InAppSupportMe: View {
 
 struct InAppSupportMe_Previews: PreviewProvider {
     static var previews: some View {
-        InAppSupportMe(defaultCornerRadius: PreviewDefinitions.Styling.defaultCornerRadius, secondaryBackground: PreviewDefinitions.Colors.secondaryBackground)
+        InAppSupportMe()
             .previewLayout(.sizeThatFits)
             .environmentObject( Store(productKeys: ExampleSupportStoreKitKeys.allCases.map { $0.rawValue }))
     }

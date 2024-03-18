@@ -8,11 +8,12 @@
 import SwiftUI
 
 public struct ListElement<Content: View>: View {
-    var cornerRadius: CGFloat
-    var bgColor: Color
+    @Environment(\.styling) var styling
+    var cornerRadius: CGFloat?
+    var bgColor: Color?
     var content: () -> Content
 
-    public init(cornerRadius: CGFloat, bgColor: Color, @ViewBuilder content: @escaping () -> Content) {
+    public init(cornerRadius: CGFloat? = nil, bgColor: Color? = nil, @ViewBuilder content: @escaping () -> Content) {
         self.cornerRadius = cornerRadius
         self.bgColor = bgColor
         self.content = content
@@ -30,8 +31,8 @@ public struct ListElement<Content: View>: View {
             alignment: .topLeading
         )
         .padding()
-        .background(bgColor)
-        .cornerRadius(cornerRadius)
+        .background(bgColor ?? styling.colors.secondaryBackground)
+        .cornerRadius(cornerRadius ?? styling.defaultCornerRadius)
     }
 }
 

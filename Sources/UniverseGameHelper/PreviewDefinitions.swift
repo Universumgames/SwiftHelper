@@ -27,17 +27,4 @@ class PreviewDefinitions {
 
         static var appName: String { "" }
     }
-
-    class Colors: ColorDefinition {
-        static var background: Color { Color.black }
-
-        static var secondaryBackground: Color { Color.gray }
-    }
-
-    class Installation: InstallationDefinitions {
-    }
-
-    class Styling: StylingDefinition {
-        static var defaultCornerRadius: CGFloat { 20 }
-    }
 }

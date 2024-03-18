@@ -62,6 +62,15 @@ public extension String {
     var localized: String {
         return NSLocalizedString(self, comment: "")
     }
+    
+    func localizedWith(_ args: [String]) -> String {
+        let argString = args.flatMap{ " " + $0 }
+        return (self + argString).localized
+    }
+    
+    func localisedInBundle(_ bundle: Bundle) -> String {
+        return NSLocalizedString(self, bundle: bundle, comment: "")
+    }
 
     func replace(_ regex: String, with: String) -> String {
         if #available(iOS 16.0, *) {

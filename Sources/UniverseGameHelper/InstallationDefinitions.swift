@@ -8,30 +8,34 @@
 import Foundation
 import SwiftUI
 
-public extension InstallationDefinitions {
-    static var isTestflightInstallation: Bool {
-        Bundle.main.appStoreReceiptURL?.lastPathComponent == "sandboxReceipt"
+open class InstallationDefinitions {
+    public static var isTestflightInstallation: Bool {
+        var isSim = false
+        #if targetEnvironment(simulator)
+            isSim = true
+        #endif
+        return Bundle.main.appStoreReceiptURL?.lastPathComponent == "sandboxReceipt" || isSim
     }
 
-    static var isFirstInstall: Bool {
+    public static var isFirstInstall: Bool {
         let val = UserDefaults.standard.string(forKey: "version") == nil
         return val
     }
 
-    static func updateLastVersion() {
+    public static func updateLastVersion() {
         UserDefaults.standard.set(appVersionString, forKey: "version")
     }
 
-    static var isNewVersion: Bool {
+    public static var isNewVersion: Bool {
         let v = UserDefaults.standard.string(forKey: "version")
         return v != nil && v != appVersionString
     }
 
-    static var showStartupSheet: Bool {
+    public static var showStartupSheet: Bool {
         isFirstInstall || isNewVersion
     }
 
-    static var testFlightNote: some View {
+    public static var testFlightNote: some View {
         Group {
             if isTestflightInstallation {
                 HStack {
@@ -46,19 +50,19 @@ public extension InstallationDefinitions {
         }
     }
 
-    static var releaseVersionNumber: String? {
+    public static var releaseVersionNumber: String? {
         Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
     }
 
-    static var buildVersionNumber: String? {
+    public static var buildVersionNumber: String? {
         Bundle.main.infoDictionary?["CFBundleVersion"] as? String
     }
 
-    static var appVersionString: String {
+    public static var appVersionString: String {
         "Version \(releaseVersionNumber ?? "unkown")\(buildVersionNumber != nil ? " build" + buildVersionNumber! : "")"
     }
 
-    static var appVersionNote: some View {
+    public static var appVersionNote: some View {
         HStack {
             Spacer()
             Text(appVersionString)
@@ -67,7 +71,16 @@ public extension InstallationDefinitions {
         }
     }
 
-    static var appName: String {
+    public static var appName: String {
         Bundle.main.infoDictionary?["CFBundleName"] as? String ?? "unkown"
+    }
+
+    public static var createdByElement: some View {
+        HStack {
+            Spacer()
+            Text("Developed by UniversumGames")
+                .font(.footnote)
+            Spacer()
+        }
     }
 }
