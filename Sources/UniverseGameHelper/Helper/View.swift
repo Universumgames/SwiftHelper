@@ -22,7 +22,7 @@ public struct Sticky: ViewModifier {
     }
 
     var zIndex: CGFloat {
-        if (isStickingY && isStickingX) || axis == .xyAxis {
+        if axis == .xyAxis {
             return .infinity
         }
         if isStickingX || isStickingY {

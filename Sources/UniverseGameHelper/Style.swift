@@ -8,29 +8,35 @@
 import Foundation
 import SwiftUI
 
-public protocol StylingDefinition: ObservableObject {
+public protocol StylingDefinition {
     var defaultCornerRadius: CGFloat { get }
 
     associatedtype colorDef: ColorDefinition
     var colors: colorDef { get }
 }
 
-public protocol ColorDefinition: ObservableObject {
+public protocol ColorDefinition {
     var background: Color { get }
     var secondaryBackground: Color { get }
-} 
-
+}
 
 public class DefaultStylingDefinition: StylingDefinition {
-    public init(){}
-    
-    @Published public var defaultCornerRadius: CGFloat = 20
+    public init(defaultCornerRadius: CGFloat = 20, colors: DefaultColorDefinition = DefaultColorDefinition()) {
+        self.defaultCornerRadius = defaultCornerRadius
+        self.colors = colors
+    }
 
-    @Published public var colors: DefaultColorDefinition = DefaultColorDefinition()
+    public var defaultCornerRadius: CGFloat
+
+    public var colors: DefaultColorDefinition
 
     public class DefaultColorDefinition: ColorDefinition {
-        @Published public var background: Color = Color(.red)
-        @Published public var secondaryBackground: Color = Color(.orange)
+        public init(background: Color = Color.red, secondaryBackground: Color = Color.orange) {
+            self.background = background
+            self.secondaryBackground = secondaryBackground
+        }
+        public var background: Color
+        public var secondaryBackground: Color
     }
 }
 

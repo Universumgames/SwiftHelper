@@ -21,15 +21,21 @@ public struct ListElement<Content: View>: View {
 
     public var body: some View {
         VStack {
-            Group(content: content)
+            HStack {
+                VStack {
+                    Group(content: content)
+                        .styling(
+                            DefaultStylingDefinition(
+                                colors: DefaultStylingDefinition.DefaultColorDefinition(
+                                    background: styling.colors.secondaryBackground,
+                                    secondaryBackground: styling.colors.background
+                                )
+                            )
+                        )
+                }
+                Spacer()
+            }
         }
-        .frame(
-            minWidth: 0,
-            maxWidth: .infinity,
-            minHeight: 0,
-            maxHeight: .infinity,
-            alignment: .topLeading
-        )
         .padding()
         .background(bgColor ?? styling.colors.secondaryBackground)
         .cornerRadius(cornerRadius ?? styling.defaultCornerRadius)

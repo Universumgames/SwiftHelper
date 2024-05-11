@@ -23,4 +23,13 @@ public extension Data {
     func toStringOrEmpty(_ encoding: String.Encoding = .utf8) -> String {
         return toString(encoding) ?? ""
     }
+    
+    func base64URLEncode() -> String {
+        let base64 = self.base64EncodedString()
+        let base64URL = base64
+            .replacingOccurrences(of: "+", with: "-")
+            .replacingOccurrences(of: "/", with: "_")
+            .replacingOccurrences(of: "=", with: "")
+        return base64URL
+    }
 }
