@@ -24,14 +24,22 @@ public struct StartupSheet: View {
         self.assetPathPrefix = assetPathPrefix
     }
 
+    @State private var selectedTab: Int = 0
+
+    @ViewBuilder
     var head: some View {
         HStack {
             Spacer()
             Button {
                 dismiss()
             } label: {
-                Text(String(localized: "button.skip", bundle: .module))
-                    .font(.title2)
+                if isFirstInstall && selectedTab == 0 {
+                    Text(String(localized: "button.skip", bundle: .module))
+                        .font(.title2)
+                } else {
+                    Text(String(localized: "button.done", bundle: .module))
+                        .font(.title2)
+                }
             }
         }
         .padding()
@@ -40,7 +48,8 @@ public struct StartupSheet: View {
     public var body: some View {
         VStack {
             head
-            TabView {
+
+            TabView(selection: $selectedTab) {
                 if isFirstInstall {
                     VStack {
                         ScrollView {
@@ -54,6 +63,7 @@ public struct StartupSheet: View {
                             .padding()
                         }
                     }
+                    .tag(0)
                 }
                 VStack {
                     ScrollView {
@@ -64,6 +74,7 @@ public struct StartupSheet: View {
                         .padding()
                     }
                 }
+                .tag(1)
             }
             .padding()
             #if os(iOS)

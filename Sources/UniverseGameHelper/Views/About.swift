@@ -115,8 +115,11 @@ public struct About<base: BaseDefinition>: View {
 
                 appWebsite
 
+                // check if not watchos
+                #if !os(watchOS)
                 BugreportButton(background: styling.colors.background, secondaryBackground: styling.colors.secondaryBackground, defaultCornerRadius: styling.defaultCornerRadius, bugreportLink: DeveloperInfo.bugreportLink, appName: InstallationDefinitions.appName)
-
+                #endif
+                
                 support
 
                 if base.showGitRepo {

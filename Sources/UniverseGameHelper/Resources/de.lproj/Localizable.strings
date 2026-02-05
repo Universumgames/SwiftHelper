@@ -1,41 +1,66 @@
-"button.sendbugreport" = "Bugreport absenden";
-
-"bugreport.sheetTitle" = "Bugreport erstellen";
-
-"bugreport.title" = "Selbsterklärender Titel";
-
-"bugreport.description" = "Bitte beschreibe das aufgetretene Problem";
-
-"bugreport.mail" = "Bitte gib deine Mail Addresse an für eventuelle weitere Rückfragen (Optional)";
-
-"bugreport.thank" = "Vielen Dank für deinen Bugreport";
-
-"button.cancel" = "Abbrechen";
-
-"bugreport.note" = "Das Absenden eines Bugreports sendet nur die hier angegebenen Daten (sowie den Programmnamen und Version) an einen externen Server für eine weitere verarbeitung und letztendliche Behebung des Problems durch einen Programmierer. Die bereitgestellten Daten werden durch die Programmierer selbst gelöscht sobald das Problem behoben wurde. Zugriff auf diese Daten haben nur die Serverinhaber und eine von ihnen ausgeählte kleine Gruppe an Personen.";
-
-"button.skip" = "Überspringen";
-
-"about.button.information" = "Informationen";
-
-"about.github" = "Github";
-
+/* (No Comment) */
 "about.bugreport" = "Problem melden";
 
-"about.support" = "Unterstüze mich";
+/* (No Comment) */
+"about.button.information" = "Informationen";
 
+/* (No Comment) */
+"about.github" = "Github";
+
+/* (No Comment) */
 "about.gitrepo" = "Git Repo";
 
-"about.website.developer" = "Developer Webseite";
+/* (No Comment) */
+"about.support" = "Unterstüze mich";
 
+/* (No Comment) */
 "about.website.app" = "App Webseite";
 
-"support.title" = "Unterstütze mich";
+/* (No Comment) */
+"about.website.developer" = "Developer Webseite";
 
-"support.note" = "Mich zu unterstützen verändert nichts (abgesehen von meiner Dankbarkeit), dies ist einfach eine Spende an mich als Programmierer dieser App";
+/* (No Comment) */
+"bugreport.description" = "Bitte beschreibe das aufgetretene Problem";
 
+/* (No Comment) */
+"bugreport.mail" = "Bitte gib deine Mail Addresse an für eventuelle weitere Rückfragen (Optional)";
+
+/* (No Comment) */
+"bugreport.note" = "Das Absenden eines Bugreports sendet nur die hier angegebenen Daten (sowie den Programmnamen und Version) an einen externen Server für eine weitere verarbeitung und letztendliche Behebung des Problems durch einen Programmierer. Die bereitgestellten Daten werden durch die Programmierer selbst gelöscht sobald das Problem behoben wurde. Zugriff auf diese Daten haben nur die Serverinhaber und eine von ihnen ausgeählte kleine Gruppe an Personen.";
+
+/* (No Comment) */
+"bugreport.sheetTitle" = "Bugreport erstellen";
+
+/* (No Comment) */
+"bugreport.thank" = "Vielen Dank für deinen Bugreport";
+
+/* (No Comment) */
+"bugreport.title" = "Selbsterklärender Titel";
+
+/* (No Comment) */
+"button.cancel" = "Abbrechen";
+
+/* (No Comment) */
+"button.done" = "Fertig";
+
+/* (No Comment) */
+"button.sendbugreport" = "Bugreport absenden";
+
+/* (No Comment) */
+"button.skip" = "Überspringen";
+
+/* (No Comment) */
 "support.empty" = "Leider kannst du mich derzeit nicht finanziell unterstützen, da etwas schieß gelaufen ist (In-App Käufe konnten nicht geladen werden)";
 
+/* (No Comment) */
+"support.note" = "Mich zu unterstützen verändert nichts (abgesehen von meiner Dankbarkeit), dies ist einfach eine Spende an mich als Programmierer dieser App";
+
+/* (No Comment) */
 "support.thank" = "Vielen Dank für deine Unterstützung. Du hilfst mir weiter diese und weitere Apps (weiter-) entwickeln und im APpStore behalten zu können. Jeder Cent hilft dabei";
 
+/* (No Comment) */
 "support.thank.title" = "Danke dir";
+
+/* (No Comment) */
+"support.title" = "Unterstütze mich";
+

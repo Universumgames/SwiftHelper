@@ -8,6 +8,7 @@
 import SwiftUI
 import UIKit
 
+#if canImport(UIView)
 @available(*, deprecated)
 public struct PullToRefreshView<ContentType: View>: View {
     var refreshAction: () -> Void
@@ -67,11 +68,11 @@ private struct RefreshScrollViewContainer<ContentType: View>: UIViewRepresentabl
         Coordinator(self, refreshAction: refreshAction)
     }
 
-    class Coordinator<ContentType: View>: NSObject {
-        var refreshScrollView: RefreshScrollViewContainer<ContentType>
+    class Coordinator<CoordinatorContentType: View>: NSObject {
+        var refreshScrollView: RefreshScrollViewContainer<CoordinatorContentType>
         var refreshAction: () -> Void
 
-        init(_ refreshScrollView: RefreshScrollViewContainer<ContentType>, refreshAction: @escaping () -> Void) {
+        init(_ refreshScrollView: RefreshScrollViewContainer<CoordinatorContentType>, refreshAction: @escaping () -> Void) {
             self.refreshScrollView = refreshScrollView
             self.refreshAction = refreshAction
         }
@@ -82,3 +83,4 @@ private struct RefreshScrollViewContainer<ContentType: View>: UIViewRepresentabl
         }
     }
 }
+#endif

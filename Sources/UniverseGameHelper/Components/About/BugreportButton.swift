@@ -1,29 +1,48 @@
 //
 //  BureportButton.swift
-//  
+//
 //
 //  Created by Tom Arlt on 17.03.24.
 //
 
 import SwiftUI
 
+@available(watchOS, unavailable)
 public struct BugreportButton: View {
     let background: Color
     let secondaryBackground: Color
     let defaultCornerRadius: CGFloat
-    
+
     let bugreportLink: String
-    
+
     let appName: String
-    
+
     @State private var showBugreport = false
     @State private var showBugReportToast = false
-    
+
+    public init(
+        background: Color,
+        secondaryBackground: Color,
+        defaultCornerRadius: CGFloat,
+        bugreportLink: String,
+        appName: String,
+        showBugreport: Bool = false,
+        showBugReportToast: Bool = false
+    ) {
+        self.background = background
+        self.secondaryBackground = secondaryBackground
+        self.defaultCornerRadius = defaultCornerRadius
+        self.bugreportLink = bugreportLink
+        self.appName = appName
+        self.showBugreport = showBugreport
+        self.showBugReportToast = showBugReportToast
+    }
+
     public var body: some View {
         Button {
             showBugreport.toggle()
         } label: {
-            ListElement() {
+            ListElement {
                 Text("about.bugreport".localisedInBundle(.module))
             }
         }
@@ -34,6 +53,7 @@ public struct BugreportButton: View {
     }
 }
 
+@available(watchOS, unavailable)
 #Preview {
     ScrollView {
         BugreportButton(background: .red, secondaryBackground: .blue, defaultCornerRadius: 10, bugreportLink: "https://www.google.com", appName: "Test App")

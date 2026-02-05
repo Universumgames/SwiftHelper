@@ -37,14 +37,14 @@ public extension String {
     }
 
     func substring(_ startIndex: Int, _ endIndex: Int) -> String {
-        let start = self.index(self.startIndex, offsetBy: startIndex)
-        let end = self.index(self.startIndex, offsetBy: endIndex)
-        let range = start..<end
+        let start = index(self.startIndex, offsetBy: startIndex)
+        let end = index(self.startIndex, offsetBy: endIndex)
+        let range = start ..< end
 
         let mySubstring = self[range]
         return String(mySubstring)
     }
-    
+
     func test(_ regex: String) -> Bool {
         do {
             let reg = try NSRegularExpression(pattern: regex)
@@ -62,18 +62,18 @@ public extension String {
     var localized: String {
         return NSLocalizedString(self, comment: "")
     }
-    
+
     func localizedWith(_ args: [String]) -> String {
-        let argString = args.flatMap{ " " + $0 }
+        let argString = args.flatMap { " " + $0 }
         return (self + argString).localized
     }
-    
+
     func localisedInBundle(_ bundle: Bundle) -> String {
         return NSLocalizedString(self, bundle: bundle, comment: "")
     }
 
     func replace(_ regex: String, with: String) -> String {
-        if #available(iOS 16.0, *) {
+        if #available(iOS 16.0, *), #available(watchOS 9.0, *) {
             return replacing(regex, with: with)
         } else {
             return replacingOccurrences(of: " ", with: "")
@@ -84,30 +84,28 @@ public extension String {
     func toLowerCase() -> String {
         return lowercased()
     }
-    
+
     // javascript equivalent
-    func includes(_ other: any StringProtocol) -> Bool{
+    func includes(_ other: any StringProtocol) -> Bool {
         return contains(other)
     }
-    
+
     func base64ToBase64url() -> String {
-        let base64url = self
-            .replacingOccurrences(of: "+", with: "-")
+        let base64url = replacingOccurrences(of: "+", with: "-")
             .replacingOccurrences(of: "/", with: "_")
             .replacingOccurrences(of: "=", with: "")
         return base64url
     }
-    
+
     func base64urlToBase64() -> String {
-        var base64 = self
-            .replacingOccurrences(of: "-", with: "+")
+        var base64 = replacingOccurrences(of: "-", with: "+")
             .replacingOccurrences(of: "_", with: "/")
         if base64.count % 4 != 0 {
             base64.append(String(repeating: "=", count: 4 - (base64.count % 4)))
         }
         return base64
     }
-    
+
     func toByteArray() -> Data? {
         return Data(base64Encoded: self)
     }

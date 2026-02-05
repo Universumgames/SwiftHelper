@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+@available(watchOS, unavailable)
 public struct RefreshableScrollView<Content: View>: View {
     @Binding private var isRefreshing: Bool
     @State private var offset: CGFloat = 0

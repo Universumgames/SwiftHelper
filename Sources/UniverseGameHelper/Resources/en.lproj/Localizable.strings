@@ -16,6 +16,8 @@
 
 "button.skip" = "Skip";
 
+"button.done" = "Done";
+
 "about.button.information" = "Information";
 
 "about.github" = "Github";

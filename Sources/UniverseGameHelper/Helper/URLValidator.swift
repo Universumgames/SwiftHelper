@@ -6,8 +6,10 @@
 //
 
 import Foundation
+#if canImport(UIKit) && !os(watchOS)
 import UIKit
 
+@available(watchOS, unavailable)
 public func verifyUrl(urlString: String?) -> Bool {
     if let urlString = urlString {
         if let url = NSURL(string: urlString) {
@@ -16,6 +18,7 @@ public func verifyUrl(urlString: String?) -> Bool {
     }
     return false
 }
+#endif
 
 public func fixBrowserURL(url: String) -> String {
     let lowerCase = url.lowercased()
@@ -24,3 +27,4 @@ public func fixBrowserURL(url: String) -> String {
     }
     return url
 }
+

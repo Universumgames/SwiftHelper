@@ -12,6 +12,16 @@ public struct GitHubLinkButton: View {
     let cornerRadius: CGFloat
     let githubLink: String
     
+    public init(
+        secondaryBackground: Color,
+        cornerRadius: CGFloat,
+        githubLink: String
+    ) {
+        self.secondaryBackground = secondaryBackground
+        self.cornerRadius = cornerRadius
+        self.githubLink = githubLink
+    }
+    
     public var body: some View {
         Link(destination: URL(string: githubLink)!) {
             ListElement() {

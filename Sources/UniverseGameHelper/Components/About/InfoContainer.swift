@@ -13,6 +13,18 @@ public struct InfoContainer: View {
     let infoText: String
     let defaultCornerRadius: CGFloat
     let secondaryBackground: Color
+    
+    public init(
+        showInfo: Bool = false,
+        infoText: String,
+        defaultCornerRadius: CGFloat,
+        secondaryBackground: Color
+    ) {
+        self.showInfo = showInfo
+        self.infoText = infoText
+        self.defaultCornerRadius = defaultCornerRadius
+        self.secondaryBackground = secondaryBackground
+    }
 
     public var body: some View {
         ListElement() {

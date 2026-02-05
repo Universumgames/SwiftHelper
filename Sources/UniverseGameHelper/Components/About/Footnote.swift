@@ -9,6 +9,10 @@ import SwiftUI
 
 public struct Footnote: View {
     
+    public init(){
+        
+    }
+    
     public var body: some View {
         VStack {
             InstallationDefinitions.createdByElement

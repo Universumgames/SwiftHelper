@@ -54,13 +54,16 @@ public extension View {
     func sticky(_ axis: StickyAxis = .yAxis, coordinateSpace space: String = "container") -> some View {
         modifier(Sticky(axis: axis, coordinateSpace: space))
     }
-    
+}
+
+@available(watchOS, unavailable)
+public extension View {
     func hapticSuccess() {
         let generator = UINotificationFeedbackGenerator()
         generator.notificationOccurred(.success)
     }
     
-    func hapticError(){
+    func hapticError() {
         let generator = UINotificationFeedbackGenerator()
         generator.notificationOccurred(.error)
     }

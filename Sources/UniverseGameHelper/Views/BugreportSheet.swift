@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+@available(watchOS, unavailable)
 public struct BugreportSheet: View {
     @Environment(\.dismiss) var dismiss
 
@@ -92,24 +93,24 @@ public struct BugreportSheet: View {
                         .allowsTightening(true)
                     if #available(iOS 16.0, *) {
                         TextEditor(text: $description)
-#if os(iOS)
+                        #if os(iOS)
                             .textInputAutocapitalization(.sentences)
                             .keyboardType(.default)
                             .multilineTextAlignment(.leading)
-#endif
+                        #endif
                             .allowsTightening(true)
                             .padding()
                             .background(secondaryBackground)
                             .cornerRadius(10)
                             .frame(height: 500)
                             .scrollContentBackground(.hidden)
-                    } else {
+                    } else if #available(iOS 14.0, macOS 11.0, *) {
                         TextEditor(text: $description)
-#if os(iOS)
+                        #if os(iOS)
                             .textInputAutocapitalization(.sentences)
                             .keyboardType(.default)
                             .multilineTextAlignment(.leading)
-#endif
+                        #endif
                             .allowsTightening(true)
                             .padding()
                             .background(secondaryBackground)
@@ -124,8 +125,7 @@ public struct BugreportSheet: View {
     }
 }
 
-struct Bugreport_Previews: PreviewProvider {
-    static var previews: some View {
-        BugreportSheet(appname: "test app", appVersionString: "test version", bugreportLink: "https://google.com", secondaryBackground: Color.gray, showThank: .constant(false))
-    }
+@available(watchOS, unavailable)
+#Preview {
+    BugreportSheet(appname: "test app", appVersionString: "test version", bugreportLink: "https://google.com", secondaryBackground: Color.gray, showThank: .constant(false))
 }

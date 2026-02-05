@@ -59,15 +59,30 @@ open class InstallationDefinitions {
     }
 
     public static var appVersionString: String {
-        "Version \(releaseVersionNumber ?? "unkown")\(buildVersionNumber != nil ? " build" + buildVersionNumber! : "")"
+        "Version \(releaseVersionNumber ?? "unkown")\(buildVersionNumber != nil ? " build " + buildVersionNumber! : "")"
+    }
+    
+    public static var gitHash: String? {
+        Bundle.main.infoDictionary?["SourceVersion"] as? String
     }
 
     public static var appVersionNote: some View {
-        HStack {
-            Spacer()
-            Text(appVersionString)
-                .font(.footnote)
-            Spacer()
+        VStack {
+            HStack {
+                Spacer()
+                Text(appVersionString)
+                    .font(.footnote)
+                Spacer()
+            }
+            if gitHash != nil {
+                HStack {
+                    Spacer()
+                    Text("App Hash: \(gitHash!)")
+                        .font(.footnote)
+                        .foregroundColor(Color.gray)
+                    Spacer()
+                }
+            }
         }
     }
 
